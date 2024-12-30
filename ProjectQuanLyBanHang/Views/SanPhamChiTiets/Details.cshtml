@@ -1,0 +1,87 @@
+﻿@model ProjectQuanLyBanHang.Models.SanPhamChiTiet
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@section breadTitle {
+    <p>Chi tiết sản phẩm <span style="font-weight: bold;">@Model.SanPham.MaSanPham </span></p>
+}
+
+
+
+<table class="table table-bordered table-hover">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(modelItem => Model.SanPham.MaSanPham)
+        </th>
+        <td>
+            @Model.SanPham.MaSanPham
+        </td>
+    </tr>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(modelItem => Model.SanPham.MaNhaCungCap)
+        </th>
+        <td>
+            @Model.SanPham.MaNhaCungCap
+        </td>
+    </tr>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(modelItem => Model.SanPham.TenSanPham)
+        </th>
+        <td>
+            @Model.SanPham.TenSanPham
+        </td>
+    </tr>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(modelItem => Model.MauSac)
+        </th>
+        <td>
+            @Model.MauSac
+        </td>
+    </tr>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(modelItem => Model.GiaTien)
+        </th>
+        <td>
+            @Model.GiaTien
+        </td>
+    </tr>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(modelItem => Model.Ram.DungLuongRam)
+        </th>
+        <td>
+            <span>@Model.Ram.DungLuongRam</span>GB - @Model.Ram.LoaiRam
+        </td>
+    </tr>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(modelItem => Model.Gpu.TenGpu)
+        </th>
+        <td>
+            @Model.Gpu.TenGpu
+        </td>
+    </tr>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(modelItem => Model.SoLuongDaBan)
+        </th>
+        <td>
+            @Model.SoLuongDaBan
+        </td>
+    </tr>
+
+</table>
+
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.SanPhamChiTietId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+@Styles.Render("~/Content/css")

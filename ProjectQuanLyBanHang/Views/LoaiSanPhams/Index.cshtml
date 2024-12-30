@@ -1,0 +1,50 @@
+﻿@model IEnumerable<ProjectQuanLyBanHang.Models.LoaiSanPham>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@section breadTitle{
+    Danh sách loại sản phẩm
+}
+
+<table class="table table-bordered">
+    <thead class="table-active">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.TenLoaiSanPham)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TenLoaiSanPham)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AnhLoaiSanPham)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+
+
+    @foreach (var item in Model)
+    {
+
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaLoaiSanPham)
+            </td>
+            <td class="font-weight-bold">
+                @Html.DisplayFor(modelItem => item.TenLoaiSanPham)
+            </td>
+            <td>
+                <img width="200" height="200" src="~/Content/Images/AnhLoaiSanPham/@item.AnhLoaiSanPham" alt="Alternate Text" class="img-thumbnail" />
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.MaLoaiSanPham }, new { @class = "btn btn-primary" })
+                @Html.ActionLink("Details", "Details", new { id = item.MaLoaiSanPham }, new { @class = "btn btn-info" })
+                @Html.ActionLink("Delete", "Delete", new { id = item.MaLoaiSanPham }, new { @class = "btn btn-danger", onclick = "return confirm('Bạn có chắc chắn muốn xóa thông tin này không?')" })
+            </td>
+        </tr>
+    }
+
+</table>

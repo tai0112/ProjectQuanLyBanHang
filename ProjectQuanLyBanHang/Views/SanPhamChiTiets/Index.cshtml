@@ -1,0 +1,141 @@
+﻿@model IEnumerable<ProjectQuanLyBanHang.Models.SanPhamChiTiet>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+@using (Html.BeginForm("Index", "SanPhamChiTiets", FormMethod.Get, new { id = "uploadForm" }))
+{
+    <div class="pb-3 d-flex align-items-center justify-content-start">
+        @Html.TextBox("search", null, new { @class = "form-control w-25 me-2", @placeholder = "Tìm kiếm", @id = "searchInput" })
+        @Html.DropDownList("searchType", new SelectList(
+            new List<SelectListItem>
+            {
+                new SelectListItem { Text = "Mã sản phẩm", Value = "SanPhamId" },
+                new SelectListItem { Text = "Tên GPU", Value = "GPU" },
+                new SelectListItem { Text = "Loại ram", Value = "RAM" },
+                new SelectListItem { Text = "SSD", Value = "SSD" },
+                new SelectListItem { Text = "Màu sắc", Value = "MauSac" },
+            },
+            "Value", "Text"), "Chọn loại tìm kiếm", new { @id = "typeSearch", @class = "form-select me-2", @style = "width: 15%;" })
+
+        <div class="d-flex flex-column ms-4 me-3">
+            <div class="d-flex justify-content-between">
+                <span style="font:10px" id="rangeMinValue" class="me-1">0</span>
+                <span style="font:10px" id="rangeMaxValue" class="ms-1">10000000</span>
+            </div>
+            <div class="d-flex">
+                <input type="range" name="priceRangeMin" id="priceRangeMin" class="form-range" value="@ViewBag.priceMin" min="0" max="10000000" step="500000">
+                <input type="range" name="priceRangeMax" id="priceRangeMax" class="form-range" value="@ViewBag.priceMax" min="9600000" max="100000000" step="500000">
+            </div>
+        </div>
+        <div class="text-end ms-3 mt-3 mb-3">
+            <input type="submit" name="name" value="Tìm kiếm" class="btn btn-info" />
+        </div>
+    </div>
+}
+
+<div class="number-product text-end d-flex justify-content-end align-items-center mb-2">
+    <p style="color: var(--primary-color); margin: 0;" class="me-3">Đã tìm được <span style="color: green">@ViewBag.SoLuongTimDuoc</span> sản phẩm</p>
+    <a style="font-size: 20px;" href="/SanPhamChiTiets/index" title="Làm mới"><i class="fa-solid fa-rotate-right"></i></a>
+</div>
+
+<table class="table table-bordered text-center table-hover">
+    <tr class="text-uppercase">
+        <th>
+            Mã sản phẩm chi tiết
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SanPham.MaSanPham)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Gpu.TenGpu)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Ram.LoaiRam)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SSD)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CPU.TenCpu)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MauSac)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SoLuongDaBan)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GiaTien)
+        </th>
+        <th>Thao tác</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        string chiTietRam = item.Ram.DungLuongRam + "GB - " + item.Ram.LoaiRam;
+
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.SanPhamChiTietId, "Details", new { id = item.SanPhamChiTietId })
+            </td>
+            <td>
+                @Html.ActionLink(item.SanPham.MaSanPham, "Details", new { id = item.SanPhamChiTietId })
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Gpu.TenGpu)
+            </td>
+            <td>
+                @chiTietRam
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SSD) GB
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CPU.TenCpu)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MauSac)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SoLuongDaBan)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GiaTien)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.SanPhamChiTietId }, new { @class = "btn btn-primary" })
+                @Html.ActionLink("Delete", "Delete", new { id = item.SanPhamChiTietId }, new { @class = "btn btn-danger", onclick = "return confirm('Bạn có chắc chắn muốn xóa thông tin của sản phẩm chi tiết này không?')" })
+            </td>
+        </tr>
+    }
+
+</table>
+
+@Styles.Render("~/Content/css")
+@Scripts.Render("~/bundles/jquery")
+
+<script>
+    if(@ViewBag.priceMin) {
+        $("#rangeMinValue").text(@ViewBag.priceMin)
+    }
+    if (@ViewBag.priceMax) {
+        $("#rangeMaxValue").text(@ViewBag.priceMax)
+    }
+    $(document).ready(function () {
+        $("#priceRangeMin").on("input", function () {
+            $("#rangeMinValue").text($("#priceRangeMin").val())
+        })
+
+        $("#priceRangeMax").on("input", function () {
+            if ($("#priceRangeMax").val() != '9600000') {
+                $("#rangeMaxValue").text($("#priceRangeMax").val())
+            } else {
+                $("#rangeMaxValue").text("10000000")
+            }
+        })
+    })
+</script>

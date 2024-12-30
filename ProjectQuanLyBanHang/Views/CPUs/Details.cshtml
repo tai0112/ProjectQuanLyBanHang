@@ -1,0 +1,43 @@
+﻿@model ProjectQuanLyBanHang.Models.CPU
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>CPU</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TenCpu)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TenCpu)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NhaSX)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NhaSX)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MoTa)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MoTa)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.CpuId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

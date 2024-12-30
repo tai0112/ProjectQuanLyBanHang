@@ -1,0 +1,35 @@
+﻿@model ProjectQuanLyBanHang.Models.GPU
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>GPU</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TenGpu)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TenGpu)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HangSX)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HangSX)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.GpuId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

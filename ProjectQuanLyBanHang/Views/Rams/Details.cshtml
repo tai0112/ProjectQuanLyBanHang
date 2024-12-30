@@ -1,0 +1,51 @@
+﻿@model ProjectQuanLyBanHang.Models.Ram
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Ram</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.LoaiRam)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LoaiRam)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MoTa)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MoTa)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DungLuongRam)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DungLuongRam)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NhaSX)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NhaSX)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.RamId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

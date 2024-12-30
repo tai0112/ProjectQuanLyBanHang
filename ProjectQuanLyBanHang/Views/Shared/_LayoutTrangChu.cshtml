@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>@ViewBag.Title</title>
+</head>
+<body>
+    <div class="app">
+        <div class="container-fluid header">
+            <div class="container d-flex p-3 justify-content-around justify-content-center align-items-center">
+                <div class="app-header__logo">
+                    Trang chủ
+                </div>
+                <div class="app-header__category d-flex">
+                    <div class="pe-2"><i class="fa-solid fa-bars"></i></div>
+                    <span>Danh mục</span>
+                </div>
+                <div class="app-header__search">
+                    <input type="text" name="search" value="" placeholder="Bạn cần tìm gì?" class="form-control" />
+                    <span></span>
+                </div>
+                <div class="app-header__hotline">
+                    <div class="d-flex">
+                        <div class="pe-2"><i class="fa-solid fa-headphones"></i></div>
+                        <p class="">Hotline <br /> 0328097858</p>
+                    </div>
+                </div>
+                <div class="app-header__showroom"></div>
+                <div class="app-header__invoice"></div>
+                <div class="app-header__cart"></div>
+                <div class="app-header__login"></div>
+            </div>
+        </div>
+    </div>
+    <div>
+        @RenderBody()
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Styles.Render("~/Content/css")
+    @RenderSection("scripts", required: false)
+    <script>
+        console.log($(".container"));
+    </script>
+</body>
+</html>

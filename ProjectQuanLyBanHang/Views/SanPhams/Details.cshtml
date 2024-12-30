@@ -1,0 +1,87 @@
+﻿@model ProjectQuanLyBanHang.Models.SanPham
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Details</h2>
+
+<table class="table table-bordered">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(modelItem => Model.NhaCungCap.TenNhaCungCap)
+        </th>
+        <td>
+            @Model.NhaCungCap.TenNhaCungCap
+        </td>
+    </tr>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(modelItem => Model.MaSanPham)
+        </th>
+        <td>
+            @Model.MaSanPham
+        </td>
+    </tr>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(modelItem => Model.TenSanPham)
+        </th>
+        <td>
+            @Model.TenSanPham
+        </td>
+    </tr>
+    <tr>
+        <th><a href="@Url.Action("Create", "SanPhamChiTiets", new { id = Model.SanPhamId})">Cấu hình</a></th> 
+        <td class="d-flex">
+            @foreach (var item in Model.SanPhamChiTiets)
+            {
+                <a class="text-decoration-none me-3" href="/SanPhamChiTiets/Details/@item.SanPhamChiTietId">
+                    <ul class="list-group">
+
+                        <li class="list-group-item"><span class="font-weight-bold">Ram</span>: <span>@item.Ram.DungLuongRam</span>GB - @item.Ram.LoaiRam</li>
+                        <li class="list-group-item"><span class="font-weight-bold">CPU</span>: @item.CPU.TenCpu</li>
+                        <li class="list-group-item"><span class="font-weight-bold">GPU</span>: @item.Gpu.TenGpu</li>
+                        <li class="list-group-item"><span class="font-weight-bold">Giá</span>: @item.GiaTien</li>
+                    </ul>
+                </a>
+            }
+
+        </td>
+    </tr>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(modelItem => Model.TrangThai)
+        </th>
+        <td>
+            @if (Model.TrangThai)
+            {
+                <span class="font-weight-bold" style="color: green;">Đã duyệt</span>
+            }
+            else
+            {
+                <span class="font-weight-bold" style="color: red;">Chưa duyệt</span>
+            }
+        </td>
+    </tr>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(modelItem => Model.MoTa)
+        </th>
+        <td style="width: 150px">
+            <input type="checkbox" class="readmore" name="readmore" value="" id="readmore" />
+            <div class="content">
+                @Html.Raw(Model.MoTa)
+            </div>
+            <label class="readmore-label" for="readmore"></label>
+        </td>
+    </tr>
+</table>
+
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.SanPhamId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+@Styles.Render("~/Content/css")

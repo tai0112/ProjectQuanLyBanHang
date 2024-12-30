@@ -1,0 +1,149 @@
+﻿@model IEnumerable<ProjectQuanLyBanHang.Models.SanPham>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@section breadTitle {
+    Danh sách sản phẩm
+}
+@using (Html.BeginForm("Index", "SanPhams", FormMethod.Get, new { id = "uploadForm" }))
+{
+    <div class="pb-3 d-flex align-items-center justify-content-start">
+        @Html.TextBox("search", null, new { @class = "form-control w-25 me-2", @placeholder = "Tìm kiếm", @id = "searchInput" })
+        @Html.DropDownList("searchType", new SelectList(
+            new List<SelectListItem>
+            {
+                new SelectListItem { Text = "Mã sản phẩm", Value = "SanPhamId" },
+                new SelectListItem { Text = "Mã nhà cung cấp", Value = "MaNhaCungCap" },
+                new SelectListItem { Text = "Tên sản phẩm", Value = "TensanPham" },
+                new SelectListItem { Text = "Ngày duyệt", Value = "NgayDuyet" },
+                new SelectListItem { Text = "Ngày tạo", Value = "NgayTao" },
+                new SelectListItem { Text = "Ngày cập nhật", Value = "NgayCapNhat" },
+            },
+            "Value", "Text"), "Chọn loại tìm kiếm", new { @id = "typeSearch", @class = "form-select me-2", @style = "width: 15%;" })
+
+        <select class="form-select" style="width: 7%;" aria-label="Default select example" name="status">
+            <option value="all" selected>Tất cả</option>
+            <option value="pass">Đã duyệt</option>
+            <option value="notPass">Chưa duyệt</option>
+        </select>
+        <div class="text-end ms-3 mt-3 mb-3">
+            <input type="submit" name="name" value="Tìm kiếm" class="btn btn-info" />
+        </div>
+    </div>
+}
+
+<div class="number-product text-end d-flex justify-content-end align-items-center mb-2">
+    <p style="color: var(--primary-color); margin: 0;" class="me-3">Đã tìm được <span style="color: green">@ViewBag.SoLuongTimDuoc</span> sản phẩm</p>
+    <a style="font-size: 20px;" href="/SanPhams/index" title="Làm mới"><i class="fa-solid fa-rotate-right"></i></a>
+</div>
+
+
+<table class="table table-bordered table-hover text-center pt-5">
+    <tr class="text-center">
+
+        <th>
+            @Html.DisplayNameFor(model => model.MaSanPham)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NhaCungCap.TenNhaCungCap)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TenSanPham)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NgayTao)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NgayCapNhat)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NgayDuyet)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TrangThai)
+        </th>
+        <th>
+            Ảnh sản phẩm
+        </th>
+        <th>Thao tác</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        string trangThai = "Đã duyệt";
+        if (!item.TrangThai)
+        {
+            trangThai = "Chưa duyệt";
+        }
+        <tr>
+            <td>
+                @Html.ActionLink(item.MaSanPham, "Details", new { id = item.SanPhamId }) <span>(@item.SanPhamChiTiets.Count()SP)</span>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NhaCungCap.TenNhaCungCap)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TenSanPham)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NgayTao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NgayCapNhat)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NgayDuyet)
+            </td>
+            <td>
+                @if (trangThai == "Chưa duyệt")
+                {
+                    <p style="color: red;">@trangThai</p>
+                }
+                else
+                {
+                    <p style="color:green;">@trangThai</p>
+                }
+            </td>
+            <td class="d-flex flex-column">
+                @if (item.AnhSanPhams.FirstOrDefault() != null)
+                {
+                    <img class="img-thumbnail" src="~/Content/Images/AnhSanPham/@item.AnhSanPhams.FirstOrDefault().UrlAnh" alt="Alternate Text" width="200" height="100" />
+                    <a href="@Url.Action("Index", "AnhSanPhams", new { id = item.AnhSanPhams.FirstOrDefault().SanPhamId })">Sửa ảnh</a>
+                }
+                else
+                {
+                    <p style="color: red">Chưa có ảnh</p>
+                }
+            </td>
+            <td>
+                @Html.ActionLink("Sửa", "Edit", new { id = item.SanPhamId }, new { @class = "btn btn-primary" })
+                @Html.ActionLink("Xóa", "Delete", new { id = item.SanPhamId }, new { @class = "btn btn-danger", onclick = "return confirm('Bạn có chắc chắn muốn xóa thông tin này không?')" })
+            </td>
+        </tr>
+    }
+
+</table>
+
+@Scripts.Render("~/bundles/jquery")
+@Styles.Render("~/Content/css")
+<script>
+    $(document).ready(function () {
+        let inputSearch = $("#searchInput");
+        $("#typeSearch").change(function () {
+            var selectedValue = $(this).val();
+            switch (selectedValue) {
+                case "NgayDuyet":
+                case "NgayTao":
+                case "NgayCapNhat":
+                    inputSearch.get(0).type = "date";
+                    break;
+                default:
+                    inputSearch.get(0).type = "text";
+                    break;
+            }
+        })
+    })
+</script>

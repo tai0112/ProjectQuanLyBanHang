@@ -1,0 +1,52 @@
+﻿@model IEnumerable<ProjectQuanLyBanHang.Models.Ram>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.LoaiRam)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MoTa)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DungLuongRam)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NhaSX)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.LoaiRam)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MoTa)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DungLuongRam)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NhaSX)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.RamId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.RamId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.RamId })
+        </td>
+    </tr>
+}
+
+</table>

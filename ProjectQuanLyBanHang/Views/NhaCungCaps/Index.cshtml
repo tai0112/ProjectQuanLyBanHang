@@ -1,0 +1,46 @@
+﻿@model IEnumerable<ProjectQuanLyBanHang.Models.NhaCungCap>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+<table class="table table-bordered">
+    <thead class="table-info">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.MaNhaCungCap)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TenNhaCungCap)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AnhNhaCungCap)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaNhaCungCap)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TenNhaCungCap)
+            </td>
+            <td>
+                <img width="200" height="200" src="~/Content/Images/AnhNhaCungCap/@item.AnhNhaCungCap" alt="Alternate Text" class="img-thumbnail" />
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.MaNhaCungCap }, new {@class="btn btn-primary"})  
+                @Html.ActionLink("Details", "Details", new { id = item.MaNhaCungCap }, new { @class = "btn btn-info" })  
+                @Html.ActionLink("Delete", "Delete", new { id = item.MaNhaCungCap }, new { @class = "btn btn-danger", onclick = "return confirm('Bạn có chắc chắn muốn xóa thông tin này không?')" })
+            </td>
+        </tr>
+    }
+
+</table>
