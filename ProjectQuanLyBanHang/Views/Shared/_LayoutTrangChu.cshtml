@@ -74,6 +74,10 @@
         </div>
     </div>
     <div style="padding-top: 80px">
+        @if (User.Identity.IsAuthenticated)
+        {
+            <h1>Hello @User.Identity.Name</h1>
+        }
         @Html.Partial("_Notification")
         @RenderBody()
     </div>

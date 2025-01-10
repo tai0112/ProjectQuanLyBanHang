@@ -17,17 +17,5 @@ namespace ProjectQuanLyBanHang.Models.BusinessClass
             return DataProvider.Context.sanPhams.Where(o => o.MaSanPham == id).FirstOrDefault();
         }
 
-        public bool Add(SanPham sanPham)
-        {
-            try
-            {
-
-                return true;
-            }catch (Exception ex)
-            {
-
-            }
-            return false;
-        }
     }
 }

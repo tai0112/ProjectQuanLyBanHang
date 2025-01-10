@@ -11,13 +11,13 @@ namespace ProjectQuanLyBanHang.Controllers
     {
         QuanLyBanHangDbContext db = new QuanLyBanHangDbContext();
         // GET: DangNhap
-        public ActionResult Index()
+        public ActionResult DangNhap()
         {
             return View();
         }
 
         [HttpPost]
-        public ActionResult Index(TaiKhoan taiKhoan)
+        public ActionResult DangNhap(TaiKhoan taiKhoan)
         {
             var login = db.taiKhoans.Where(o => o.TenDangNhap == taiKhoan.TenDangNhap && o.MatKhau == taiKhoan.MatKhau).FirstOrDefault();
             if (taiKhoan.TenDangNhap == "admin" && taiKhoan.MatKhau == "admin")

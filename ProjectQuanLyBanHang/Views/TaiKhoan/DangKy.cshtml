@@ -1,0 +1,54 @@
+﻿@model ProjectQuanLyBanHang.ViewModel.RegisterVM 
+
+@{
+    ViewBag.Title = "DangKy";
+    Layout = "~/Views/Shared/_LayoutTrangChu.cshtml";
+}
+
+<h2>Đăng ký</h2>
+
+@using (Html.BeginForm("DangKy", "TaiKhoan", FormMethod.Post))
+{
+    <div class="row">
+        <div class="col-6">
+            @Html.LabelFor(model => model.UserName)
+            @Html.TextBoxFor(model => model.UserName, new { placeholder = "Username", @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.UserName)
+        </div>
+        <div class="col-6">
+            @Html.LabelFor(model => model.Email)
+            @Html.TextBoxFor(model => model.Email, new { placeholder = "Email", @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Email)
+        </div>
+        <div class="col-6">
+            @Html.LabelFor(model => model.Password)
+            @Html.TextBoxFor(model => model.Password, new { placeholder = "Password", @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Password)
+        </div>
+        <div class="col-6">
+            @Html.LabelFor(model => model.ConfirmPassword)
+            @Html.TextBoxFor(model => model.ConfirmPassword, new { placeholder = "Confirm Password", @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.ConfirmPassword)
+        </div>
+        <div class="col-6">
+            @Html.LabelFor(model => model.SDT)
+            @Html.TextBoxFor(model => model.SDT, new { placeholder = "Số điện thoại", @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.SDT)
+        </div>
+        <div class="col-6">
+            @Html.LabelFor(model => model.NgaySinh)
+            @Html.TextBoxFor(model => model.NgaySinh, new { placeholder = "Ngày sinh", @class = "form-control", type = "date" })
+            @Html.ValidationMessageFor(model => model.NgaySinh)
+        </div>
+        <div class="col-6">
+            <label>Giới tính:</label><br />
+            @Html.RadioButtonFor(model => model.GioiTinh, true, new { @id = "Male" })
+            <label for="Male">Nam</label>
+            @Html.RadioButtonFor(model => model.GioiTinh, false, new { @id = "Female" })
+            <label for="Female">Nữ</label>
+        </div>
+
+        <button class="btn btn-success" type="submit">Đăng ký</button>
+    </div>
+}
+
