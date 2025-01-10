@@ -38,7 +38,7 @@
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.CpuId }) |
             @Html.ActionLink("Details", "Details", new { id=item.CpuId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.CpuId })
+            @Html.ActionLink("Delete", "Delete", new { id=item.CpuId, onclick = "return confirm('Bạn có chắc chắn muốn xóa thông tin này không?')" })
         </td>
     </tr>
 }

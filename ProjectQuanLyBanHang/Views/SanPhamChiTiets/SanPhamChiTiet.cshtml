@@ -1,0 +1,87 @@
+﻿@model ProjectQuanLyBanHang.Models.SanPhamChiTiet
+
+@{
+    ViewBag.Title = "SanPhamChiTiet";
+    Layout = "~/Views/Shared/_LayoutTrangChu.cshtml";
+}
+
+<div class="container">
+    <div class="navigator pt-3 pb-3">
+        <a class="navbar-link" href="/TrangChu/TrangChu"><b><i class="fa-solid fa-house"></i> Trang chủ</a> &nbsp / &nbsp <a class="navbar-link" href="">@Model.SanPham.TenSanPham</b></a>
+    </div>
+    <div class="container-content">
+        <div class="row">
+            <div class="product-gallery col-5">
+                <div class="container-images">
+                    <div class="hightlight-image">
+                        @foreach (var item in Model.SanPham.AnhSanPhams)
+                        {
+                            <img src="~/Content/Images/AnhSanPham/@item.UrlAnh" alt="@item.TenAnh" />
+                        }
+                    </div>
+                    <div class="slider-image">
+                        @foreach (var item in Model.SanPham.AnhSanPhams)
+                        {
+                            <img style="object-fit:cover;" width="117" height="117" src="~/Content/Images/AnhSanPham/@item.UrlAnh" alt="@item.TenAnh" />
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="col-7">
+                <div class="product-info d-flex flex-column">
+                    <h1 style="font-weight:bold;" class="name-product mt-3">@Model.SanPham.TenSanPham<span>(@Model.CPU.TenCpu / @Model.Gpu.TenGpu)</span></h1>
+                    <span style="color: var(--primary-color); font-size: 32px;" class="price mt-3">@Model.GiaTien</span>
+                    <div class="gift-info mt-3" style="color:var(--primary-color);font-size:18px;">
+                        <div class="heading-gift">
+                            <i class="fa-solid fa-gift me-2 mr-2"></i>
+                            <span>Quà tặng khuyến mãi</span>
+                        </div>
+                        <div class="gift-detail d-flex align-items-center">
+                            <p class="m-0 me-2 hight-light">1</p>
+                            <span class="detail-content" style="color:#000;font-size:14px;">Tặng ngay <span style="color:var(--primary-color);">1</span> x <strong style="color:var(--primary-color);">Màn hình MSI MAG 271QPX QD-OLED E2 27" QD-OLED 2K 240Hz chuyên game</strong></span>
+                        </div>
+                    </div>
+                    <div>
+                        @using (Html.BeginForm("AddToCart", "SanPhamChiTiets", FormMethod.Post))
+                        {
+                            <input hidden name="id" value="@Model.SanPhamChiTietId">
+                            <button type="submit" class="col-6 btn d-flex flex-column align-items-center mt-3" style=" padding: 10px; font-size: 18px; color: #fff; background-color: var(--primary-color)">
+                                <span class="text-uppercase" style="font-weight: 500;">Mua ngay</span>
+                                <span style="font-size: 14px">Giao tận nơi hoặc nhận tại cửa hàng</span>
+                            </button>
+                        }
+
+                    </div>
+                    <div class="">
+                        <p class="text-uppercase mt-3" style="font-size:18px; color:var(--primary-color);font-weight:bold;"><strong>Ưu đãi khi mua kèm pc</strong></p>
+                        <p class="deal"><i class="fa-solid fa-star star-icon"></i> <span><strong>Ưu đãi lên đến 54% khi mua kèm PC </strong><a href="#">xem ngay tại đây</a></span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    $('.hightlight-image').slick({
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        arrows: false,
+        speed: 300,
+        Infinity: true,
+        asNavFor: '.slider-image'
+    });
+    $('.slider-image').slick({
+        centerMode: true,
+        centerPadding: '60px',
+        slidesToShow: 3,
+        speed: 300,
+        focusOnSelect: true,
+        slidesToScroll: 1,
+        asNavFor: '.hightlight-image',
+        Infinity: true,
+        prevArrow: '<button style="z-index: 1; background-color: #ccc; width: 30px; height: 30px; border-radius: 50%" class="slick-next"><i style="font-size: 10px; color: var(--primary-color);" class="fa-solid fa-chevron-left"></i></button>',
+        nextArrow: '<button style="z-index: 1; background-color: #ccc; width: 30px; height: 30px; border-radius: 50%" class="slick-prev"><i style="font-size: 10px; color: #000; color: var(--primary-color)" class="fa-solid fa-chevron-right"></i></button>',
+    });
+</script>

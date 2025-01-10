@@ -9,6 +9,7 @@
  */
 :root {
     --blue: #007bff;
+    --link-color: #1982F9;
     --indigo: #6610f2;
     --purple: #6f42c1;
     --pink: #e83e8c;
@@ -162,11 +163,7 @@ a {
 
 }
 
-.body-content {
-    margin-top: 15px;
-    padding-left: 15px;
-    padding-right: 15px;
-}
+
 
 .dl-horizontal dt {
     white-space: normal;
@@ -233,10 +230,13 @@ input:checked ~ .readmore-label:after {
 }
 
 th {
-    font-size: 15px;
+    font-size: 13px;
+    background-color: #ccc;
 }
 
 td {
-    font-size: 15px;
+    font-size: 13px;
 }
+
+
 

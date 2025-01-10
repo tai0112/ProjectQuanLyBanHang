@@ -1,5 +1,6 @@
-﻿@model IEnumerable<ProjectQuanLyBanHang.Models.SanPham>
-
+﻿@model PagedList.IPagedList<ProjectQuanLyBanHang.Models.SanPham>
+@using PagedList.Mvc;
+<link href="/Content/PagedList.css" rel="stylesheet" type="text/css" />
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
@@ -24,10 +25,15 @@
             },
             "Value", "Text"), "Chọn loại tìm kiếm", new { @id = "typeSearch", @class = "form-select me-2", @style = "width: 15%;" })
 
-        <select class="form-select" style="width: 7%;" aria-label="Default select example" name="status">
-            <option value="all" selected>Tất cả</option>
+        <select class="form-select me-2" style="width: 11%;" aria-label="Default select example" name="status">
+            <option value="all" selected>Trạng thái duyệt</option>
             <option value="pass">Đã duyệt</option>
             <option value="notPass">Chưa duyệt</option>
+        </select>
+        <select class="form-select" style="width: 10%;" aria-label="Default select example" name="picture">
+            <option value="all" selected>Trạng thái ảnh</option>
+            <option value="picture">Đã có ảnh</option>
+            <option value="notPicture">Chưa có ảnh</option>
         </select>
         <div class="text-end ms-3 mt-3 mb-3">
             <input type="submit" name="name" value="Tìm kiếm" class="btn btn-info" />
@@ -45,25 +51,28 @@
     <tr class="text-center">
 
         <th>
-            @Html.DisplayNameFor(model => model.MaSanPham)
+            Mã sản phẩm
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.NhaCungCap.TenNhaCungCap)
+            Nhà cung cấp
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.TenSanPham)
+            Tên sản phẩm
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.NgayTao)
+            Ngày tạo
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.NgayCapNhat)
+            Ngày cập nhật
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.NgayDuyet)
+            Ngày duyệt
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.TrangThai)
+            Trạng thái
+        </th>
+        <th>
+            Loại sản phẩm
         </th>
         <th>
             Ảnh sản phẩm
@@ -107,11 +116,13 @@
                     <p style="color:green;">@trangThai</p>
                 }
             </td>
-            <td class="d-flex flex-column">
+            <td>
+                @Html.DisplayFor(modelItem => item.LoaiSanPham.TenLoaiSanPham)
+            </td>
+            <td>
                 @if (item.AnhSanPhams.FirstOrDefault() != null)
                 {
-                    <img class="img-thumbnail" src="~/Content/Images/AnhSanPham/@item.AnhSanPhams.FirstOrDefault().UrlAnh" alt="Alternate Text" width="200" height="100" />
-                    <a href="@Url.Action("Index", "AnhSanPhams", new { id = item.AnhSanPhams.FirstOrDefault().SanPhamId })">Sửa ảnh</a>
+                    <a style="color:green;" href="@Url.Action("Index", "AnhSanPhams", new { id = item.AnhSanPhams.FirstOrDefault().SanPhamId })">Đã có ảnh</a>
                 }
                 else
                 {
@@ -126,9 +137,12 @@
     }
 
 </table>
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
 
 @Scripts.Render("~/bundles/jquery")
 @Styles.Render("~/Content/css")
+
+
 <script>
     $(document).ready(function () {
         let inputSearch = $("#searchInput");

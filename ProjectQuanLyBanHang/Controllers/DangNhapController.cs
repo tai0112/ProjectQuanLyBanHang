@@ -20,13 +20,19 @@ namespace ProjectQuanLyBanHang.Controllers
         public ActionResult Index(TaiKhoan taiKhoan)
         {
             var login = db.taiKhoans.Where(o => o.TenDangNhap == taiKhoan.TenDangNhap && o.MatKhau == taiKhoan.MatKhau).FirstOrDefault();
-            TempData["Login"] = "Chào đón";
-            if (login != null)
+            if (taiKhoan.TenDangNhap == "admin" && taiKhoan.MatKhau == "admin")
             {
-                TempData["type"] = "Đăng nhập thành công";
+                TempData["Success"] = "Đăng nhập thành công";
+                Session["AccountId"] = taiKhoan.TaiKhoanId;
             }
-            TempData["type"] = "Đăng nhập thất bại";
-            return View();
+            TempData["Error"] = "Đăng nhập thất bại";
+            return RedirectToAction("TrangChu", "TrangChu");
+        }
+
+        public ActionResult Logout()
+        {
+            Session["AccountId"] = null;
+            return RedirectToAction("TrangChu", "TrangChu");
         }
     }
 }

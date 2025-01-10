@@ -9,6 +9,8 @@
     <meta property="og:title" content="Vali - Free Bootstrap 4 admin theme">
     <meta property="og:url" content="http://pratikborsadiya.in/blog/vali-admin">
     <meta property="og:image" content="http://pratikborsadiya.in/blog/vali-admin/hero-social.png">
+
+
     <meta property="og:description" content="Vali is a responsive and free admin theme built with Bootstrap 4, SASS and PUG.js. It's fully customizable and modular.">
     <title>Vali Admin - Free Bootstrap 4 Admin Template</title>
     <meta charset="utf-8">
@@ -19,7 +21,9 @@
     <!-- Font-icon css-->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet" />
     <script src="https://cdn.ckeditor.com/4.20.2/standard/ckeditor.js"></script>
-
+    @*Toastr*@
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 </head>
 <body class="app sidebar-mini rtl">
     <!-- Navbar-->
@@ -115,8 +119,8 @@
         <div class="app-sidebar__user">
             <img class="app-sidebar__user-avatar" src="https://s3.amazonaws.com/uifaces/faces/twitter/jsa/48.jpg" alt="User Image">
             <div>
+                @*Mai sau dùng để hiển thị tên và vai trò*@
                 <p class="app-sidebar__user-name">John Doe</p>
-                <p class="app-sidebar__user-designation">Frontend Developer</p>
             </div>
         </div>
         <ul class="app-menu">
@@ -124,23 +128,23 @@
             <li class="treeview">
                 <a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-laptop"></i><span class="app-menu__label">Loại sản phẩm</span><i class="treeview-indicator fa fa-angle-right"></i></a>
                 <ul class="treeview-menu">
-                    <li><a class="treeview-item" href="/LoaiSanPhams/"><i class="icon fa fa-circle-o"></i> Danh sách loại sản phẩm</a></li>
+                    <li><a class="treeview-item" href="/LoaiSanPhams/Index"><i class="icon fa fa-circle-o"></i> Danh sách loại sản phẩm</a></li>
                     <li><a class="treeview-item" href="/LoaiSanPhams/Create" rel="noopener"><i class="icon fa fa-circle-o"></i> Cập nhật loại sản phẩm</a></li>
                 </ul>
             </li>
             <li class="treeview">
                 <a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa-solid fa-industry"></i><span class="app-menu__label">Nhà cung cấp</span><i class="treeview-indicator fa fa-angle-right"></i></a>
                 <ul class="treeview-menu">
-                    <li><a class="treeview-item" href="/NhaCungCaps/"><i class="icon fa fa-circle-o"></i> Danh sách nhà cung cấp</a></li>
+                    <li><a class="treeview-item" href="/NhaCungCaps/Index"><i class="icon fa fa-circle-o"></i> Danh sách nhà cung cấp</a></li>
                     <li><a class="treeview-item" href="/NhaCungCaps/Create" rel="noopener"><i class="icon fa fa-circle-o"></i>Cập nhât nhà cung cấp</a></li>
                 </ul>
             </li>
             <li class="treeview">
                 <a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-laptop"></i><span class="app-menu__label">Sản phẩm</span><i class="treeview-indicator fa fa-angle-right"></i></a>
                 <ul class="treeview-menu">
-                    <li><a class="treeview-item" href="/SanPhams/"><i class="icon fa fa-circle-o"></i> Danh sách sản phẩm</a></li>
+                    <li><a class="treeview-item" href="/SanPhams/Index"><i class="icon fa fa-circle-o"></i> Danh sách sản phẩm</a></li>
                     <li><a class="treeview-item" href="/SanPhams/Create" rel="noopener"><i class="icon fa fa-circle-o"></i> Thêm sản phẩm</a></li>
-                    <li><a class="treeview-item" href="/SanPhamChiTiets/" rel="noopener"><i class="icon fa fa-circle-o"></i> Danh sách chi tiết sản phẩm</a></li>
+                    <li><a class="treeview-item" href="/SanPhamChiTiets/Index" rel="noopener"><i class="icon fa fa-circle-o"></i> Danh sách chi tiết sản phẩm</a></li>
                     <li><a class="treeview-item" href="/SanPhamChiTiets/Create" rel="noopener"><i class="icon fa fa-circle-o"></i>Cập nhật chi tiết sản phẩm</a></li>
                 </ul>
             </li>
@@ -158,6 +162,7 @@
         </div>
         <div class="col-md-12">
             <div class="tile">
+                @Html.Partial("_Notification")
                 @RenderBody()
             </div>
         </div>

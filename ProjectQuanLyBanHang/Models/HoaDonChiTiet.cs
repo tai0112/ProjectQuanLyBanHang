@@ -17,14 +17,14 @@ namespace ProjectQuanLyBanHang.Models
         [Required]
         [Key, Column(Order = 1)]
         [DisplayName("Mã sản phẩm")]
-        public int SanPhamId { get; set; }
+        public int SanPhamChiTietId { get; set; }
         [DisplayName("Số lượng")]
         [Required]
         public int SoLuong { get; set; }
         [DisplayName("Thành tiền")]
         [Required]
         public decimal ThanhTien { get; set; }
-        public virtual SanPham SanPham { get; set; }
+        public virtual SanPhamChiTiet SanPhamChiTiet { get; set; }
         public virtual HoaDon HoaDon{ get; set; }
     }
 }

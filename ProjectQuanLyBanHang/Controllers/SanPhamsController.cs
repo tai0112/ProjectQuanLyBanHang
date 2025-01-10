@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.IO;
 using Ganss.Xss;
+using PagedList;
 using Microsoft.Win32.SafeHandles;
 using ProjectQuanLyBanHang.Models;
 using System.Data.Common;
@@ -19,12 +20,18 @@ namespace ProjectQuanLyBanHang.Controllers
 {
     public class SanPhamsController : Controller
     {
-        private QuanLyBanHangDbContext db = new QuanLyBanHangDbContext();
-
-        public ActionResult Index(string search, string searchType, string status)
+        QuanLyBanHangDbContext db = new QuanLyBanHangDbContext();
+        public ActionResult Index(int? page, string search, string searchType, string status, string picture)
         {
-            var sanPhams = db.sanPhams.Include(s => s.NhaCungCap);
+            if (page == null)
+            {
+                page = 1;
+            }
 
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
+
+            var sanPhams = db.sanPhams.Include(s => s.NhaCungCap);
             if (status == "pass")
             {
                 sanPhams = db.sanPhams.Where(o => o.TrangThai == true);
@@ -32,6 +39,15 @@ namespace ProjectQuanLyBanHang.Controllers
             else if (status == "notPass")
             {
                 sanPhams = db.sanPhams.Where(o => o.TrangThai != true);
+            }
+
+            if (picture == "picture")
+            {
+                sanPhams = db.sanPhams.Where(o => o.AnhSanPhams.Count() > 0);
+            }
+            else if (picture == "notPicture")
+            {
+                sanPhams = db.sanPhams.Where(o => o.AnhSanPhams.Count == 0);
             }
 
             if (!string.IsNullOrEmpty(search))
@@ -66,9 +82,11 @@ namespace ProjectQuanLyBanHang.Controllers
                 }
             }
             ViewBag.SoLuongTimDuoc = sanPhams.Count();
-
-            return View(sanPhams.ToList());
+            
+            return View(sanPhams.OrderBy(o => o.MaSanPham).ToPagedList(pageNumber, pageSize));
         }
+
+        
 
         public ActionResult Details(int? id)
         {
@@ -87,53 +105,63 @@ namespace ProjectQuanLyBanHang.Controllers
         public ActionResult Create()
         {
             ViewBag.MaNhaCungCap = new SelectList(db.nhaCungCaps, "MaNhaCungCap", "TenNhaCungCap");
+            ViewBag.MaLoaiSanPham = new SelectList(db.loaiSanPhams, "MaLoaiSanPham", "TenLoaiSanPham");
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "SanPhamId,MaSanPham,TenSanPham,MoTa,TrangThai,MaNhaCungCap")] SanPham sanPham, IEnumerable<HttpPostedFileBase> fAnhSanPham)
+        public ActionResult Create([Bind(Include = "SanPhamId,MaSanPham,TenSanPham,MoTa,TrangThai,MaNhaCungCap,MaLoaiSanPham")] SanPham sanPham, IEnumerable<HttpPostedFileBase> fAnhSanPham)
         {
             //Lưu lại danh sách ảnh ban đầu
             if (ModelState.IsValid)
             {
-                //Kiểm tra nếu phần file của ảnh sản phẩm trống thì thực hiện sửa đổi hình ảnh còn không thì giữ nguyên
-                if (fAnhSanPham != null)
+                int checkMa = db.sanPhams.Count(o => o.MaSanPham == sanPham.MaSanPham);
+                if (checkMa == 0)
                 {
-                    AnhSanPham anhSanPham = null;
-                    string imageName;
-                    foreach (HttpPostedFileBase file in fAnhSanPham)
+                    //Kiểm tra nếu phần file của ảnh sản phẩm trống thì thực hiện sửa đổi hình ảnh còn không thì giữ nguyên
+                    if (fAnhSanPham != null && fAnhSanPham.FirstOrDefault() != null)
                     {
-                        imageName = System.IO.Path.GetFileName(file.FileName);
-                        string path = Path.Combine("~/Content/Images/AnhSanPham", imageName);
-                        if (System.IO.File.Exists(path))
+                        AnhSanPham anhSanPham = null;
+                        string imageName;
+                        foreach (HttpPostedFileBase file in fAnhSanPham)
                         {
-                            TempData["isExist"] = true;
-                        }
-                        else
-                        {
-                            TempData["isExist"] = false;
-                            file.SaveAs(Server.MapPath(path));
-                            anhSanPham = new AnhSanPham(sanPham.TenSanPham, sanPham.SanPhamId, imageName);
-                            db.anhSanPhams.Add(anhSanPham);
+                            imageName = System.IO.Path.GetFileName(file.FileName);
+                            string path = Path.Combine("~/Content/Images/AnhSanPham", imageName);
+                            if (System.IO.File.Exists(path))
+                            {
+                                TempData["Error"] = "Ảnh sản phẩm đã tồn tại";
+                            }
+                            else
+                            {
+                                file.SaveAs(Server.MapPath(path));
+                                anhSanPham = new AnhSanPham(sanPham.TenSanPham, sanPham.SanPhamId, imageName);
+                                db.anhSanPhams.Add(anhSanPham);
+                            }
                         }
                     }
+                    //Tránh tấn công XSS
+                    var sanitizer = new HtmlSanitizer();
+                    var sanitizerContent = sanitizer.Sanitize(sanPham.MoTa);
+                    sanPham.MoTa = sanitizerContent;
+                    //Cập nhật thời gian được duyệt
+                    if (sanPham.TrangThai == true)
+                    {
+                        DateTime ngayCapNhat = DateTime.Now;
+                        sanPham.NgayDuyet = ngayCapNhat.ToLocalTime();
+                    }
+                    db.sanPhams.Add(sanPham);
+                    db.SaveChanges();
+                    TempData["Success"] = "Thêm thành công sản phẩm";
+                    return RedirectToAction("Index");
                 }
-                //Tránh tấn công XSS
-                var sanitizer = new HtmlSanitizer();
-                var sanitizerContent = sanitizer.Sanitize(sanPham.MoTa);
-                sanPham.MoTa = sanitizerContent;
-                //Cập nhật thời gian được duyệt
-                if (sanPham.TrangThai == true)
+                else
                 {
-                    DateTime ngayCapNhat = DateTime.Now;
-                    sanPham.NgayDuyet = ngayCapNhat.ToLocalTime();
+                    TempData["Error"] = "Mã sản phẩm đã tồn tại";
                 }
-                db.sanPhams.Add(sanPham);
-                db.SaveChanges();
-                return RedirectToAction("Index");
             }
             ViewBag.MaNhaCungCap = new SelectList(db.nhaCungCaps, "MaNhaCungCap", "TenNhaCungCap", sanPham.MaNhaCungCap);
+            ViewBag.MaLoaiSanPham = new SelectList(db.loaiSanPhams, "MaLoaiSanPham", "TenLoaiSanPham", sanPham.MaLoaiSanPham);
             return View(sanPham);
         }
 
@@ -149,12 +177,13 @@ namespace ProjectQuanLyBanHang.Controllers
                 return HttpNotFound();
             }
             ViewBag.MaNhaCungCap = new SelectList(db.nhaCungCaps, "MaNhaCungCap", "TenNhaCungCap", sanPham.MaNhaCungCap);
+            ViewBag.MaLoaiSanPham = new SelectList(db.loaiSanPhams, "MaLoaiSanPham", "TenLoaiSanPham", sanPham.MaLoaiSanPham);
             return View(sanPham);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "SanPhamId,MaSanPham,TenSanPham,MoTa,TrangThai,MaNhaCungCap,NgayTao")] SanPham sanPham, IEnumerable<HttpPostedFileBase> fAnhSanPham)
+        public ActionResult Edit([Bind(Include = "SanPhamId,MaSanPham,TenSanPham,MoTa,TrangThai,MaNhaCungCap,NgayTao,MaLoaiSanPham")] SanPham sanPham, IEnumerable<HttpPostedFileBase> fAnhSanPham)
         {
             var anhSanPhams = db.anhSanPhams.Where(o => o.AnhSanPhamId == sanPham.SanPhamId).ToList();
             if (ModelState.IsValid)
@@ -180,10 +209,12 @@ namespace ProjectQuanLyBanHang.Controllers
                     sanPham.NgayDuyet = DateTime.Now;
                 }
                 db.Entry(sanPham).State = EntityState.Modified;
+                TempData["Success"] = "Sửa thành công sản phẩm";
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
             ViewBag.MaNhaCungCap = new SelectList(db.nhaCungCaps, "MaNhaCungCap", "TenNhaCungCap", sanPham.MaNhaCungCap);
+            ViewBag.MaLoaiSanPham = new SelectList(db.loaiSanPhams, "MaLoaiSanPham", "TenLoaiSanPham", sanPham.MaLoaiSanPham);
             return View(sanPham);
         }
 
@@ -195,6 +226,7 @@ namespace ProjectQuanLyBanHang.Controllers
             DataProvider.DeleteMultipleImage(path, anhSanPhams);
             db.sanPhams.Remove(sanPham);
             db.SaveChanges();
+            TempData["Success"] = "Xóa thành công sản phẩm";
             return RedirectToAction("Index");
         }
 

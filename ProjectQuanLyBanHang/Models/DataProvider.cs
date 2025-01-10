@@ -43,11 +43,17 @@ namespace ProjectQuanLyBanHang.Models
         public static void DeleteMultipleImage(string folderPath, ICollection<AnhSanPham> files)
         {
             AnhSanPham anhSanPham;
-            foreach (var file in files)
+            if(files.Count > 0)
             {
-                anhSanPham = db.anhSanPhams.Where(o => o.AnhSanPhamId == file.AnhSanPhamId).FirstOrDefault();
-                db.anhSanPhams.Remove(anhSanPham);
-                DeleteImage(file.UrlAnh, folderPath);
+                foreach (var file in files)
+                {
+                    anhSanPham = db.anhSanPhams.Where(o => o.AnhSanPhamId == file.AnhSanPhamId).FirstOrDefault();
+                    db.anhSanPhams.Remove(anhSanPham);
+                    DeleteImage(file.UrlAnh, folderPath);
+                }
+            }else
+            {
+                return;
             }
         }
 

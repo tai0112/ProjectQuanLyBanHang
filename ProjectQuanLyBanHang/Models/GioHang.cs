@@ -19,6 +19,6 @@ namespace ProjectQuanLyBanHang.Models
         [DisplayName("Thành tiền")]
         public decimal ThanhTien { get; set; }
         public virtual TaiKhoan TaiKhoan { get; set; }
-        public virtual ICollection<GioHang> GioHangs{ get; set; }
+        public virtual ICollection<GioHangChiTiet> GioHangChiTiets{ get; set; }
     }
 }

@@ -7,7 +7,7 @@
 
 <h2>Details</h2>
 
-<table class="table table-bordered">
+<table class="table table-bordered font-weight-bold">
     <tr>
         <th>
             @Html.DisplayNameFor(modelItem => Model.NhaCungCap.TenNhaCungCap)
@@ -33,20 +33,26 @@
         </td>
     </tr>
     <tr>
-        <th><a href="@Url.Action("Create", "SanPhamChiTiets", new { id = Model.SanPhamId})">Cấu hình</a></th> 
-        <td class="d-flex">
-            @foreach (var item in Model.SanPhamChiTiets)
+        <th><a href="@Url.Action("Create", "SanPhamChiTiets", new { id = Model.SanPhamId})">Cấu hình</a></th>
+        <td class="d-flex flex-wrap">
+            @if (Model.SanPhamChiTiets.Count() > 0)
             {
-                <a class="text-decoration-none me-3" href="/SanPhamChiTiets/Details/@item.SanPhamChiTietId">
-                    <ul class="list-group">
-
-                        <li class="list-group-item"><span class="font-weight-bold">Ram</span>: <span>@item.Ram.DungLuongRam</span>GB - @item.Ram.LoaiRam</li>
-                        <li class="list-group-item"><span class="font-weight-bold">CPU</span>: @item.CPU.TenCpu</li>
-                        <li class="list-group-item"><span class="font-weight-bold">GPU</span>: @item.Gpu.TenGpu</li>
-                        <li class="list-group-item"><span class="font-weight-bold">Giá</span>: @item.GiaTien</li>
-                    </ul>
-                </a>
+                foreach (var item in Model.SanPhamChiTiets)
+                {
+                    <a class="text-decoration-none me-3 mt-1" href="/SanPhamChiTiets/Details/@item.SanPhamChiTietId">
+                        <ul class="list-group">
+                            <li class="list-group-item"><span class="font-weight-bold">Ram</span>: <span>@item.Ram.DungLuongRam</span>GB - @item.Ram.LoaiRam</li>
+                            <li class="list-group-item"><span class="font-weight-bold">CPU</span>: @item.CPU.TenCpu</li>
+                            <li class="list-group-item"><span class="font-weight-bold">GPU</span>: @item.Gpu.TenGpu</li>
+                            <li class="list-group-item"><span class="font-weight-bold">Giá</span>: @item.GiaTien</li>
+                        </ul>
+                    </a>
+                }
+            }else
+            {
+                <span class="font-weight-bold" style="color: red;">Chưa có cấu hình chi tiết</span>
             }
+
 
         </td>
     </tr>

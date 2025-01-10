@@ -70,6 +70,14 @@
     </tr>
     <tr>
         <th>
+            @Html.DisplayNameFor(modelItem => Model.GiaTien)
+        </th>
+        <td>
+            @Model.GiaTien
+        </td>
+    </tr>
+    <tr>
+        <th>
             @Html.DisplayNameFor(modelItem => Model.SoLuongDaBan)
         </th>
         <td>
@@ -80,8 +88,9 @@
 </table>
 
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.SanPhamChiTietId }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Edit", "Edit", new { id = Model.SanPhamChiTietId }, new { @class = "btn btn-primary"}) 
+    @Html.ActionLink("Back to List", "Index", null, new {@class = "btn btn-secondary"})
 </p>
+
 
 @Styles.Render("~/Content/css")

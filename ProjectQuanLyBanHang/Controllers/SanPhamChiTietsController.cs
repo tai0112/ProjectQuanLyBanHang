@@ -4,6 +4,7 @@ using System.Collections.Immutable;
 using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Core.Metadata.Edm;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -22,25 +23,25 @@ namespace ProjectQuanLyBanHang.Controllers
         {
             var sanPhamChiTiets = db.sanPhamChiTiets.Include(s => s.CPU).Include(s => s.Gpu).Include(s => s.Ram).Include(s => s.SanPham);
             int priceMax = 0, priceMin = 0;
-            if(int.TryParse(priceRangeMin, out priceMin))
+            if (int.TryParse(priceRangeMin, out priceMin))
             {
                 sanPhamChiTiets = db.sanPhamChiTiets.Where(o => o.GiaTien >= priceMin);
             }
 
-            if(int.TryParse(priceRangeMax, out priceMax))
+            if (int.TryParse(priceRangeMax, out priceMax))
             {
-                if(priceMax > 9600000)
+                if (priceMax > 9600000)
                 {
                     sanPhamChiTiets = db.sanPhamChiTiets.Where(o => o.GiaTien <= priceMax);
                 }
             }
-            
+
 
             if (!String.IsNullOrEmpty(search))
             {
-                if(!String.IsNullOrEmpty(searchType))
+                if (!String.IsNullOrEmpty(searchType))
                 {
-                    switch(searchType) 
+                    switch (searchType)
                     {
                         case "SanPhamId":
                             sanPhamChiTiets = sanPhamChiTiets.Where(o => o.SanPham.MaSanPham == search);
@@ -50,10 +51,11 @@ namespace ProjectQuanLyBanHang.Controllers
                             break;
                         case "RAM":
                             int ram = 0;
-                            if(int.TryParse(search, out ram))
+                            if (int.TryParse(search, out ram))
                             {
                                 sanPhamChiTiets = sanPhamChiTiets.Where(o => o.Ram.DungLuongRam == ram);
-                            }else
+                            }
+                            else
                             {
                                 TempData["erorr"] = "Bạn nhập sai kiểu dữ liệu tìm kiếm cho RAM";
                             }
@@ -72,19 +74,20 @@ namespace ProjectQuanLyBanHang.Controllers
                         case "MauSac":
                             sanPhamChiTiets = sanPhamChiTiets.Where(o => o.MauSac == search);
                             break;
-                        }
-                }else
+                    }
+                }
+                else
                 {
                     sanPhamChiTiets = db.sanPhamChiTiets.Where(o => o.SanPham.MaSanPham == search);
                 }
-                
+
             }
 
             ViewBag.priceMin = priceMin;
             ViewBag.priceMax = priceMax;
             ViewBag.SoLuongTimDuoc = sanPhamChiTiets.Count();
 
-            return View(sanPhamChiTiets.ToList());
+            return View(sanPhamChiTiets.OrderBy(o => o.SanPham.MaSanPham).ToList());
         }
 
         // GET: SanPhamChiTiets/Details/5
@@ -108,16 +111,25 @@ namespace ProjectQuanLyBanHang.Controllers
             var ramList = db.rams.OrderBy(o => o.DungLuongRam).Select(r => new
             {
                 RamId = r.RamId,
-                DisplayValue = r.DungLuongRam + " - " + r.LoaiRam + " - " + r.NhaSX
+                DisplayValue = r.DungLuongRam + "GB - " + r.LoaiRam + " - " + r.NhaSX
             }).ToList();
 
             ViewBag.RamId = new SelectList(ramList, "RamId", "DisplayValue");
-
             ViewBag.CpuId = new SelectList(db.cpus, "CpuId", "TenCpu");
             ViewBag.GpuId = new SelectList(db.gpus, "GpuId", "TenGpu");
             ViewBag.RamId = new SelectList(ramList, "RamId", "DisplayValue");
             ViewBag.SanPhamId = new SelectList(db.sanPhams.Where(o => o.SanPhamId == id), "SanPhamId", "MaSanPham");
             return View();
+        }
+
+        public ActionResult SanPhamChiTiet(int id)
+        {
+            var sanPhamChiTiet = db.sanPhamChiTiets.Where(o => o.SanPhamChiTietId == id).FirstOrDefault();
+            foreach (var item in sanPhamChiTiet.SanPham.AnhSanPhams)
+            {
+                
+            }
+            return View(sanPhamChiTiet);
         }
 
         // POST: SanPhamChiTiets/Create
@@ -187,6 +199,12 @@ namespace ProjectQuanLyBanHang.Controllers
             db.sanPhamChiTiets.Remove(sanPhamChiTiet);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        public ActionResult AddToCart()
+        {
+
+            return View();
         }
 
         protected override void Dispose(bool disposing)

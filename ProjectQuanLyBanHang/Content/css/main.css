@@ -138,6 +138,7 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
   display: block;
 }
 
+
 body {
     margin: 0;
     font-family: "Roboto", serif;
@@ -5016,14 +5017,7 @@ input[type="button"].btn-block {
   color: #6c757d;
 }
 
-.pagination {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  padding-left: 0;
-  list-style: none;
-  border-radius: 0.25rem;
-}
+
 
 .page-link {
   position: relative;

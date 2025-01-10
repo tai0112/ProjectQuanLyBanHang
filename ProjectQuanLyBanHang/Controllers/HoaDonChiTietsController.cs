@@ -17,7 +17,7 @@ namespace ProjectQuanLyBanHang.Controllers
         // GET: HoaDonChiTiets
         public ActionResult Index()
         {
-            var hoaDonChiTiets = db.hoaDonChiTiets.Include(h => h.HoaDon).Include(h => h.SanPham);
+            var hoaDonChiTiets = db.hoaDonChiTiets.Include(h => h.HoaDon).Include(h => h.SanPhamChiTiet);
             return View(hoaDonChiTiets.ToList());
         }
 
@@ -40,7 +40,7 @@ namespace ProjectQuanLyBanHang.Controllers
         public ActionResult Create()
         {
             ViewBag.HoaDonId = new SelectList(db.hoaDons, "HoaDonId", "MaHoaDon");
-            ViewBag.SanPhamId = new SelectList(db.sanPhams, "SanPhamId", "MaSanPham");
+            ViewBag.SanPhamChiTietId = new SelectList(db.sanPhamChiTiets, "SanPhamChiTietId", "MauSac");
             return View();
         }
 
@@ -49,7 +49,7 @@ namespace ProjectQuanLyBanHang.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "HoaDonId,SanPhamId,SoLuong,ThanhTien")] HoaDonChiTiet hoaDonChiTiet)
+        public ActionResult Create([Bind(Include = "HoaDonId,SanPhamChiTietId,SoLuong,ThanhTien")] HoaDonChiTiet hoaDonChiTiet)
         {
             if (ModelState.IsValid)
             {
@@ -59,7 +59,7 @@ namespace ProjectQuanLyBanHang.Controllers
             }
 
             ViewBag.HoaDonId = new SelectList(db.hoaDons, "HoaDonId", "MaHoaDon", hoaDonChiTiet.HoaDonId);
-            ViewBag.SanPhamId = new SelectList(db.sanPhams, "SanPhamId", "MaSanPham", hoaDonChiTiet.SanPhamId);
+            ViewBag.SanPhamChiTietId = new SelectList(db.sanPhamChiTiets, "SanPhamChiTietId", "MauSac", hoaDonChiTiet.SanPhamChiTietId);
             return View(hoaDonChiTiet);
         }
 
@@ -76,7 +76,7 @@ namespace ProjectQuanLyBanHang.Controllers
                 return HttpNotFound();
             }
             ViewBag.HoaDonId = new SelectList(db.hoaDons, "HoaDonId", "MaHoaDon", hoaDonChiTiet.HoaDonId);
-            ViewBag.SanPhamId = new SelectList(db.sanPhams, "SanPhamId", "MaSanPham", hoaDonChiTiet.SanPhamId);
+            ViewBag.SanPhamChiTietId = new SelectList(db.sanPhamChiTiets, "SanPhamChiTietId", "MauSac", hoaDonChiTiet.SanPhamChiTietId);
             return View(hoaDonChiTiet);
         }
 
@@ -85,7 +85,7 @@ namespace ProjectQuanLyBanHang.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "HoaDonId,SanPhamId,SoLuong,ThanhTien")] HoaDonChiTiet hoaDonChiTiet)
+        public ActionResult Edit([Bind(Include = "HoaDonId,SanPhamChiTietId,SoLuong,ThanhTien")] HoaDonChiTiet hoaDonChiTiet)
         {
             if (ModelState.IsValid)
             {
@@ -94,7 +94,7 @@ namespace ProjectQuanLyBanHang.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.HoaDonId = new SelectList(db.hoaDons, "HoaDonId", "MaHoaDon", hoaDonChiTiet.HoaDonId);
-            ViewBag.SanPhamId = new SelectList(db.sanPhams, "SanPhamId", "MaSanPham", hoaDonChiTiet.SanPhamId);
+            ViewBag.SanPhamChiTietId = new SelectList(db.sanPhamChiTiets, "SanPhamChiTietId", "MauSac", hoaDonChiTiet.SanPhamChiTietId);
             return View(hoaDonChiTiet);
         }
 

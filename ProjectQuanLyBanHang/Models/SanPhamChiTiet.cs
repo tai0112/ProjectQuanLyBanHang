@@ -22,7 +22,7 @@ namespace ProjectQuanLyBanHang.Models
         public int SoLuongDaBan { get; set; }
         [DisplayName("Giá tiền")]
         [Required]
-        public decimal GiaTien { get; set; }
+        public int GiaTien { get; set; }
         [DisplayName("RAM")]
         [Required]
         public int RamId { get; set; }

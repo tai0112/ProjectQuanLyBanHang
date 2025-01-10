@@ -17,7 +17,7 @@ namespace ProjectQuanLyBanHang.Controllers
         // GET: AnhSanPhams
         public ActionResult Index()
         {
-            var anhSanPhams = db.anhSanPhams.Where(o => o.SanPhamId == 13).Include(a => a.SanPham);
+            var anhSanPhams = db.anhSanPhams;
             return View(anhSanPhams.ToList());
         }
 
@@ -28,7 +28,7 @@ namespace ProjectQuanLyBanHang.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            AnhSanPham anhSanPham = db.anhSanPhams.Find(id);
+            AnhSanPham anhSanPham = db.anhSanPhams.Where(o => o.SanPham.SanPhamId == id).FirstOrDefault();
             if (anhSanPham == null)
             {
                 return HttpNotFound();

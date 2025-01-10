@@ -4,45 +4,84 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    @Scripts.Render("~/bundles/jquery")
+    @*Slide slick*@
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css" integrity="sha512-yHknP1/AwR+yx26cB1y0cjvQUMvEa2PFzt1c9LlS4pRQ5NOTZFWbhBig+X9G9eYW/8m0/4OXNx8pxJ6z57x0dw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="~/Content/main.css" rel="stylesheet" />
+    @*swiper slide*@
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/11.0.5/swiper-bundle.min.css" integrity="sha512-rd0qOHVMOcez6pLWPVFIv7EfSdGKLt+eafXh4RO/12Fgr41hDQxfGvoi1Vy55QIVcQEujUE1LQrATCLl2Fs+ag==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>@ViewBag.Title</title>
+
 </head>
-<body>
+<body style="background-color: #ececec;">
     <div class="app">
-        <div class="container-fluid header">
-            <div class="container d-flex p-3 justify-content-around justify-content-center align-items-center">
-                <div class="app-header__logo">
-                    Trang chủ
+        <div class="container-fluid header fixed-top pt-3 pb-3">
+            <div class="container d-flex justify-content-between justify-content-center align-items-center">
+                <div class="app-header app-header__logo">
+                    <a class="text-decoration-none text-white" href="/TrangChu/TrangChu">Trang chủ</a>
                 </div>
-                <div class="app-header__category d-flex">
-                    <div class="pe-2"><i class="fa-solid fa-bars"></i></div>
+                <div class="app-header app-header__category d-flex">
+                    <div class="icon-content pe-2 d-flex align-items-center"><i class="fa-solid fa-bars"></i></div>
                     <span>Danh mục</span>
                 </div>
-                <div class="app-header__search">
-                    <input type="text" name="search" value="" placeholder="Bạn cần tìm gì?" class="form-control" />
-                    <span></span>
+                <div class="app-header app-header__search d-flex">
+                    <input type="text" name="search" value="" placeholder="Bạn cần tìm gì?" class="search-input form-control" />
+                    <span class=""><i class="icon-center icon-content fa-solid fa-magnifying-glass"></i></span>
                 </div>
-                <div class="app-header__hotline">
+                <div class="app-header app-header__hotline">
                     <div class="d-flex">
-                        <div class="pe-2"><i class="fa-solid fa-headphones"></i></div>
-                        <p class="">Hotline <br /> 0328097858</p>
+                        <div class="icon-content pe-2 d-flex align-items-center"><i class="fa-solid fa-headphones"></i></div>
+                        <div class="d-flex flex-column">
+                            <span class="lh-1">Hotline</span>
+                            <span>0328097858</span>
+                        </div>
                     </div>
                 </div>
-                <div class="app-header__showroom"></div>
-                <div class="app-header__invoice"></div>
-                <div class="app-header__cart"></div>
-                <div class="app-header__login"></div>
+                <div class="app-header app-header__showroom d-flex">
+                    <i class="icon-content fa-solid fa-location-dot me-2 d-flex align-items-center"></i>
+                    <div class="d-flex flex-column">
+                        <span class="lh-1">Hệ thống</span>
+                        <span>Showroom</span>
+                    </div>
+                </div>
+                <div class="app-header app-header__invoice d-flex">
+                    <div class="icon-content pe-2 d-flex align-items-center"><i class="fa-solid fa-file-invoice"></i></div>
+                    <div class="d-flex flex-column">
+                        <span class="lh-1">Tra cứu</span>
+                        <span>đơn hàng</span>
+                    </div>
+                </div>
+                <div class="app-header app-header__invoice d-flex">
+                    <div class="icon-content pe-2 d-flex align-items-center"><i class="fa-solid fa-cart-shopping"></i></div>
+                    <div class="d-flex flex-column">
+                        <span class="lh-1">Giỏ</span>
+                        <span>hàng</span>
+                    </div>
+                </div>
+                <div class="app-header app-header__login d-flex">
+                    <div class="icon-content pe-2"><i class="fa-solid fa-user"></i></div>
+                    <a class="text-decoration-none text-white" href="/DangNhap/Index">
+                        <div class="d-flex flex-column">
+                            <span class="lh-1">Đăng</span>
+                            <span class="">nhập</span>
+                        </div>
+                    </a>
+                </div>
             </div>
         </div>
     </div>
-    <div>
+    <div style="padding-top: 80px">
+        @Html.Partial("_Notification")
         @RenderBody()
     </div>
-    @Scripts.Render("~/bundles/jquery")
+    <script src="~/Scripts/Util.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/11.0.5/swiper-bundle.min.js" integrity="sha512-Ysw1DcK1P+uYLqprEAzNQJP+J4hTx4t/3X2nbVwszao8wD+9afLjBQYjz7Uk4ADP+Er++mJoScI42ueGtQOzEA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     @Scripts.Render("~/bundles/bootstrap")
     @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/main")
     @RenderSection("scripts", required: false)
-    <script>
-        console.log($(".container"));
-    </script>
 </body>
 </html>

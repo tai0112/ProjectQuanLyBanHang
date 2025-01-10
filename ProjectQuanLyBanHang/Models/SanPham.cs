@@ -35,6 +35,8 @@ namespace ProjectQuanLyBanHang.Models
         public DateTime NgayCapNhat { get; set; } = DateTime.Now;
         [DisplayName("Ngày duyệt")]
         public DateTime? NgayDuyet { get; set; }
+        [DisplayName("Loại sản phẩm")]
+        public int MaLoaiSanPham { get; set; } = 11;
         public virtual LoaiSanPham LoaiSanPham { get; set; }
         public virtual ICollection<HoaDonChiTiet> HoaDonChiTiets { get; set; }
         public virtual ICollection<GioHangChiTiet> GioHangChiTiets { get; set; }

@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<h2>Create</h2>
+<h2>Thêm</h2>
 
 
 
@@ -34,6 +34,14 @@
         </div>
 
         <div class="form-group">
+            @Html.LabelFor(model => model.MaLoaiSanPham, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("MaLoaiSanPham", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.LoaiSanPham, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
             @Html.LabelFor(model => model.MoTa, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.TextAreaFor(model => model.MoTa, new { htmlAttributes = new { @class = "form-control" }, id = "content" })
@@ -41,13 +49,10 @@
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.TrangThai, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.TrangThai)
-                    @Html.ValidationMessageFor(model => model.TrangThai, "", new { @class = "text-danger" })
-                </div>
+        <div class="form-check pt-2 pb-2">
+            <div class="checkbox">
+                @Html.EditorFor(model => model.TrangThai)
+                @Html.LabelFor(model => model.TrangThai, htmlAttributes: new { @class = "form-check-label col-md-2" })
             </div>
         </div>
 
@@ -58,6 +63,8 @@
                 @Html.ValidationMessageFor(model => model.MaNhaCungCap, "", new { @class = "text-danger" })
             </div>
         </div>
+
+
         <div class="form-group">
             @Html.Label("Ảnh sản phẩm", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -78,6 +85,3 @@
     @Html.ActionLink("Back to List", "Index")
 </div>
 
-<script>
-
-</script>

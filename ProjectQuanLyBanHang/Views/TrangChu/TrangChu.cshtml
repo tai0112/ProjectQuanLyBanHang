@@ -1,8 +1,142 @@
-﻿
+﻿@model IEnumerable<ProjectQuanLyBanHang.Models.SanPhamChiTiet>
+
 @{
-    ViewBag.Title = "TrangChu";
+    ViewBag.Title = "Trang chủ";
     Layout = "~/Views/Shared/_LayoutTrangChu.cshtml";
 }
 
-<h2>Trang chủ</h2>
+<div class="container">
+    <div class="row">
+        <div class="col-2">
+            <div class="app-sidebar sidenav-toggled">
+                <div class="list-group">
+                    @foreach (var item in ViewBag.LoaiSanPham)
+                    {
+                        <a href="" data-toggle="tooltip" data-placement="right" title="@item.MaLoaiSanPham" style="font-size: 13px; font-weight: 500;" class="align-items-center sidebar-item list-group-item d-flex justify-content-between">
+                            <span>@item.TenLoaiSanPham</span><i class="fa-solid fa-chevron-right"></i>
+                        </a>
+                        <div class="megamenu">
+                            @{
+                                <span>Nhà cung cấp</span>
+                                <div class="list-group">
+                                    @foreach (var sanPham in item.SanPhams)
+                                    {
+                                        <span class="list-group-item">@sanPham.MaSanPham</span>
+                                    }
+                                </div>
+                            }
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="col-10">
+            <div class="container-banner">
+                <div class="img-container">
+                    <img class="img-product" src="~/Content/Images/AnhBia/wallhaven-4vyvy8.jpg" alt="Ảnh bìa" />
+                </div>
+                <div class="img-container">
+                    <img class="img-product" src="~/Content/Images/AnhBia/Italy_Lake_Mountains_Forests_Scenery_Fusine_Lakes_612958_3840x2160.jpg" alt="Ảnh bìa" />
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="container mt-3 rounded-3 pt-4 pb-4" style="background-color: #fff">
+        <div class="container-laptop__gaming">
+            <div class="container-laptop__heading d-flex justify-content-between me-3 ms-3">
+                <span class="text-capitalize heading-container">Laptop gaming</span>
+                <a class="watch-all" style="font-size: 18px" href="#">Xem tất cả</a>
+            </div>
+            <div class="container-list-laptop__gaming d-flex flex-wrap justify-content-between">
+                @foreach (var item in Model.Where(o => o.SanPham.MaLoaiSanPham == 37))
+                {
+                    <a class="" style="color: #333333" href="@Url.Action("SanPhamChiTiet", "SanPhamChiTiets", new { id = item.SanPhamChiTietId })">
+                        <div class="laptop-gaming__item d-flex flex-column me-3">
+                            <div class="title pb-2"></div>
+                            <div class="laptop-gaming__img">
+                                @if (@item.SanPham.AnhSanPhams.FirstOrDefault() != null)
+                                {
+                                    <img class="img_laptop-gaming" src="~/Content/Images/AnhSanPham/@item.SanPham.AnhSanPhams.FirstOrDefault().UrlAnh" alt="Ảnh sản phẩm @item.SanPham.TenSanPham" />
+                                }
+                                else
+                                {
+                                    <img alt="Ảnh sản phẩm @item.SanPham.TenSanPham" />
+                                }
+                            </div>
+                            <div class="container-description">
+                                <div class="container-name-laptop">
+                                    <span style="font-size: 14px;">@item.SanPham.TenSanPham</span>
+                                </div>
+                                <div class="container-config">
+                                    <span class="container-config__item container-config__ram">
+                                        @Html.Partial("_ram")
+                                        <span>
+                                            @item.Ram.DungLuongRam<span>GB</span>
+                                        </span>
+                                    </span>
+                                    <span class="container-config__item container-config__cpu">
+                                        @Html.Partial("_cpu")
+                                        <span>
+                                            @item.CPU.TenCpu
+                                        </span>
+                                    </span>
+                                    <span class="container-config__item container-config__gpu">
+                                        @Html.Partial("_gpu")
+                                        <span>
+                                            @item.Gpu.TenGpu
+                                        </span>
+                                    </span>
+                                    <span class="container-config__item container-config__rom d-flex align-items-center">
+                                        @Html.Partial("_ssd")
+                                        <span class="ms-1 ssd">@item.SSD</span>
+                                    </span>
+                                </div>
+                                <div class="container-price">
+                                    <span style="color: var(--primary-color)" class="font-weight-bold price">@item.GiaTien</span>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+@Styles.Render("~/Content/css")
+
+<script>
+    document.querySelectorAll('.sidebar-item').forEach((item, index) => {
+        item.addEventListener('mouseenter', () => {
+            document.querySelectorAll('.megamenu')[index].classList.add('active');
+        });
+        item.addEventListener('mouseleave', () => {
+            document.querySelectorAll('.megamenu')[index].classList.remove('active');
+        });
+    });
+
+    $('.container-banner').slick({
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        autoplay: true,
+        autoplaySpeed: 2000,
+        fade: true,
+        prevArrow: '<button class="slick-prev"><i style="font-size: 30px" class="fa-solid fa-chevron-right"></i></button>',
+        nextArrow: '<button class="slick-next"><i style="font-size: 30px" class="fa-solid fa-chevron-left"></i></button>',
+    });
+
+    $('.container-list-laptop__gaming').slick({
+        infinite: true,
+        slidesToShow: 5,
+        slidesToScroll: 1,
+        autoplaySpeed: 5000,
+        autoplay: true,
+        prevArrow: '<button style="z-index: 1; background-color: #ccc; width: 30px; height: 30px; border-radius: 50%" class="slick-next"><i style="font-size: 10px; color: var(--primary-color);" class="fa-solid fa-chevron-left"></i></button>',
+        nextArrow: '<button style="z-index: 1; background-color: #ccc; width: 30px; height: 30px; border-radius: 50%" class="slick-prev"><i style="font-size: 10px; color: #000; color: var(--primary-color)" class="fa-solid fa-chevron-right"></i></button>',
+    })
+
+</script>
 

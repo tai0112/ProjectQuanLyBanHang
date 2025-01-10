@@ -92,23 +92,6 @@ namespace ProjectQuanLyBanHang.Controllers
         // GET: CPUs/Delete/5
         public ActionResult Delete(int? id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            CPU cPU = db.cpus.Find(id);
-            if (cPU == null)
-            {
-                return HttpNotFound();
-            }
-            return View(cPU);
-        }
-
-        // POST: CPUs/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
             CPU cPU = db.cpus.Find(id);
             db.cpus.Remove(cPU);
             db.SaveChanges();

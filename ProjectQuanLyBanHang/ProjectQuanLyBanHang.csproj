@@ -62,6 +62,12 @@
       <HintPath>..\packages\HtmlSanitizer.8.1.870\lib\net461\HtmlSanitizer.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
@@ -206,8 +212,30 @@
     <Compile Include="Migrations\202412270333268_addSSD.Designer.cs">
       <DependentUpon>202412270333268_addSSD.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202412310829370_addMaLoaiSanPhamToSanPham.cs" />
+    <Compile Include="Migrations\202412310829370_addMaLoaiSanPhamToSanPham.Designer.cs">
+      <DependentUpon>202412310829370_addMaLoaiSanPhamToSanPham.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202501030841382_alterSanPhamIdToSanPhamChiTietId.cs" />
+    <Compile Include="Migrations\202501030841382_alterSanPhamIdToSanPhamChiTietId.Designer.cs">
+      <DependentUpon>202501030841382_alterSanPhamIdToSanPhamChiTietId.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202501030844293_altetForeignKeyGioHang.cs" />
+    <Compile Include="Migrations\202501030844293_altetForeignKeyGioHang.Designer.cs">
+      <DependentUpon>202501030844293_altetForeignKeyGioHang.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202501060513321_alterPriceDecimalToFloat.cs" />
+    <Compile Include="Migrations\202501060513321_alterPriceDecimalToFloat.Designer.cs">
+      <DependentUpon>202501060513321_alterPriceDecimalToFloat.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202501060516561_alterPriceFloatToInt.cs" />
+    <Compile Include="Migrations\202501060516561_alterPriceFloatToInt.Designer.cs">
+      <DependentUpon>202501060516561_alterPriceFloatToInt.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AnhSanPham.cs" />
+    <Compile Include="Models\BusinessClass\DataProvider.cs" />
+    <Compile Include="Models\BusinessClass\SanPhamBusiness.cs" />
     <Compile Include="Models\CPU.cs" />
     <Compile Include="Models\DataProvider.cs" />
     <Compile Include="Models\GioHang.cs" />
@@ -244,6 +272,12 @@
     <Content Include="Content\bootstrap.rtl.min.css" />
     <Content Include="Content\css\._main.css" />
     <Content Include="Content\css\main.css" />
+    <Content Include="Content\Images\AnhBia\05+Desktop.jpg" />
+    <Content Include="Content\Images\AnhBia\209361.jpg" />
+    <Content Include="Content\Images\AnhBia\5817852-3840x2160-desktop-hd-motivational-wallpaper-photo.jpg" />
+    <Content Include="Content\Images\AnhBia\Italy_Lake_Mountains_Forests_Scenery_Fusine_Lakes_612958_3840x2160.jpg" />
+    <Content Include="Content\Images\AnhBia\wallhaven-4vyvy8.jpg" />
+    <Content Include="Content\Images\AnhBia\wallhaven-qz76y7.png" />
     <Content Include="Content\Images\AnhLoaiSanPham\2in1.jpg" />
     <Content Include="Content\Images\AnhLoaiSanPham\camung.jpg" />
     <Content Include="Content\Images\AnhLoaiSanPham\caocap.jpg" />
@@ -272,6 +306,8 @@
     <Content Include="Content\LoginCss\css\bootstrap\utilities\_stretched-link.css" />
     <Content Include="Content\LoginCss\css\bootstrap\_media.css" />
     <Content Include="Content\LoginCss\css\style.css" />
+    <Content Include="Content\main.css" />
+    <Content Include="Content\PagedList.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -358,21 +394,6 @@
     <Content Include="Views\GioHangs\Details.cshtml" />
     <Content Include="Views\GioHangs\Edit.cshtml" />
     <Content Include="Views\GioHangs\Index.cshtml" />
-    <Content Include="Views\GioHangChiTiets\Create.cshtml" />
-    <Content Include="Views\GioHangChiTiets\Delete.cshtml" />
-    <Content Include="Views\GioHangChiTiets\Details.cshtml" />
-    <Content Include="Views\GioHangChiTiets\Edit.cshtml" />
-    <Content Include="Views\GioHangChiTiets\Index.cshtml" />
-    <Content Include="Views\HoaDons\Create.cshtml" />
-    <Content Include="Views\HoaDons\Delete.cshtml" />
-    <Content Include="Views\HoaDons\Details.cshtml" />
-    <Content Include="Views\HoaDons\Edit.cshtml" />
-    <Content Include="Views\HoaDons\Index.cshtml" />
-    <Content Include="Views\HoaDonChiTiets\Create.cshtml" />
-    <Content Include="Views\HoaDonChiTiets\Delete.cshtml" />
-    <Content Include="Views\HoaDonChiTiets\Details.cshtml" />
-    <Content Include="Views\HoaDonChiTiets\Edit.cshtml" />
-    <Content Include="Views\HoaDonChiTiets\Index.cshtml" />
     <Content Include="Views\LoaiSanPhams\Create.cshtml" />
     <Content Include="Views\LoaiSanPhams\Details.cshtml" />
     <Content Include="Views\LoaiSanPhams\Edit.cshtml" />
@@ -398,7 +419,6 @@
     <Content Include="Views\DangNhap\Index.cshtml" />
     <Content Include="Scripts\LoginScripts\js\.DS_Store" />
     <Content Include="Views\CPUs\Create.cshtml" />
-    <Content Include="Views\CPUs\Delete.cshtml" />
     <Content Include="Views\CPUs\Details.cshtml" />
     <Content Include="Views\CPUs\Edit.cshtml" />
     <Content Include="Views\CPUs\Index.cshtml" />
@@ -408,7 +428,6 @@
     <Content Include="Views\GPUs\Edit.cshtml" />
     <Content Include="Views\GPUs\Index.cshtml" />
     <Content Include="Views\SanPhamChiTiets\Create.cshtml" />
-    <Content Include="Views\SanPhamChiTiets\Delete.cshtml" />
     <Content Include="Views\SanPhamChiTiets\Details.cshtml" />
     <Content Include="Views\SanPhamChiTiets\Edit.cshtml" />
     <Content Include="Views\SanPhamChiTiets\Index.cshtml" />
@@ -419,6 +438,28 @@
     <Content Include="Views\Rams\Index.cshtml" />
     <Content Include="Views\Shared\_LayoutTrangChu.cshtml" />
     <Content Include="Views\TrangChu\TrangChu.cshtml" />
+    <Content Include="Views\Shared\_Notification.cshtml" />
+    <Content Include="Views\HoaDonChiTiets\Create.cshtml" />
+    <Content Include="Views\HoaDonChiTiets\Delete.cshtml" />
+    <Content Include="Views\HoaDonChiTiets\Details.cshtml" />
+    <Content Include="Views\HoaDonChiTiets\Edit.cshtml" />
+    <Content Include="Views\HoaDonChiTiets\Index.cshtml" />
+    <Content Include="Views\GioHangChiTiets\Create.cshtml" />
+    <Content Include="Views\GioHangChiTiets\Delete.cshtml" />
+    <Content Include="Views\GioHangChiTiets\Details.cshtml" />
+    <Content Include="Views\GioHangChiTiets\Edit.cshtml" />
+    <Content Include="Views\GioHangChiTiets\Index.cshtml" />
+    <Content Include="Views\HoaDons\Create.cshtml" />
+    <Content Include="Views\HoaDons\Delete.cshtml" />
+    <Content Include="Views\HoaDons\Details.cshtml" />
+    <Content Include="Views\HoaDons\Edit.cshtml" />
+    <Content Include="Views\HoaDons\Index.cshtml" />
+    <Content Include="Views\SanPhamChiTiets\SanPhamChiTiet.cshtml" />
+    <Content Include="Views\SanPhams\ToanBoSanPham.cshtml" />
+    <Content Include="Views\Shared\_ram.cshtml" />
+    <Content Include="Views\Shared\_cpu.cshtml" />
+    <Content Include="Views\Shared\_gpu.cshtml" />
+    <Content Include="Views\Shared\_ssd.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -475,6 +516,21 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202412270333268_addSSD.resx">
       <DependentUpon>202412270333268_addSSD.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202412310829370_addMaLoaiSanPhamToSanPham.resx">
+      <DependentUpon>202412310829370_addMaLoaiSanPhamToSanPham.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202501030841382_alterSanPhamIdToSanPhamChiTietId.resx">
+      <DependentUpon>202501030841382_alterSanPhamIdToSanPhamChiTietId.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202501030844293_altetForeignKeyGioHang.resx">
+      <DependentUpon>202501030844293_altetForeignKeyGioHang.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202501060513321_alterPriceDecimalToFloat.resx">
+      <DependentUpon>202501060513321_alterPriceDecimalToFloat.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202501060516561_alterPriceFloatToInt.resx">
+      <DependentUpon>202501060516561_alterPriceFloatToInt.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
