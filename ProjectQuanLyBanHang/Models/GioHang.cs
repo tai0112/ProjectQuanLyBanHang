@@ -17,7 +17,7 @@ namespace ProjectQuanLyBanHang.Models
         public int TaiKhoanId { get; set; }
         [Required]
         [DisplayName("Thành tiền")]
-        public decimal ThanhTien { get; set; }
+        public float ThanhTien { get; set; } = 0;
         public virtual TaiKhoan TaiKhoan { get; set; }
         public virtual ICollection<GioHangChiTiet> GioHangChiTiets{ get; set; }
     }

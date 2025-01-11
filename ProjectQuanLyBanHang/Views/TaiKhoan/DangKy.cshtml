@@ -1,54 +1,145 @@
-﻿@model ProjectQuanLyBanHang.ViewModel.RegisterVM 
+﻿@model ProjectQuanLyBanHang.ViewModel.RegisterVM
 
 @{
-    ViewBag.Title = "DangKy";
-    Layout = "~/Views/Shared/_LayoutTrangChu.cshtml";
+    ViewBag.Title = "Create";
+    Layout = "";
 }
 
-<h2>Đăng ký</h2>
+<!doctype html>
+<html lang="vi">
+<head>
+    <title>Đăng ký</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-@using (Html.BeginForm("DangKy", "TaiKhoan", FormMethod.Post))
-{
-    <div class="row">
-        <div class="col-6">
-            @Html.LabelFor(model => model.UserName)
-            @Html.TextBoxFor(model => model.UserName, new { placeholder = "Username", @class = "form-control" })
-            @Html.ValidationMessageFor(model => model.UserName)
-        </div>
-        <div class="col-6">
-            @Html.LabelFor(model => model.Email)
-            @Html.TextBoxFor(model => model.Email, new { placeholder = "Email", @class = "form-control" })
-            @Html.ValidationMessageFor(model => model.Email)
-        </div>
-        <div class="col-6">
-            @Html.LabelFor(model => model.Password)
-            @Html.TextBoxFor(model => model.Password, new { placeholder = "Password", @class = "form-control" })
-            @Html.ValidationMessageFor(model => model.Password)
-        </div>
-        <div class="col-6">
-            @Html.LabelFor(model => model.ConfirmPassword)
-            @Html.TextBoxFor(model => model.ConfirmPassword, new { placeholder = "Confirm Password", @class = "form-control" })
-            @Html.ValidationMessageFor(model => model.ConfirmPassword)
-        </div>
-        <div class="col-6">
-            @Html.LabelFor(model => model.SDT)
-            @Html.TextBoxFor(model => model.SDT, new { placeholder = "Số điện thoại", @class = "form-control" })
-            @Html.ValidationMessageFor(model => model.SDT)
-        </div>
-        <div class="col-6">
-            @Html.LabelFor(model => model.NgaySinh)
-            @Html.TextBoxFor(model => model.NgaySinh, new { placeholder = "Ngày sinh", @class = "form-control", type = "date" })
-            @Html.ValidationMessageFor(model => model.NgaySinh)
-        </div>
-        <div class="col-6">
-            <label>Giới tính:</label><br />
-            @Html.RadioButtonFor(model => model.GioiTinh, true, new { @id = "Male" })
-            <label for="Male">Nam</label>
-            @Html.RadioButtonFor(model => model.GioiTinh, false, new { @id = "Female" })
-            <label for="Female">Nữ</label>
-        </div>
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900&display=swap" rel="stylesheet">
 
-        <button class="btn btn-success" type="submit">Đăng ký</button>
-    </div>
-}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <link rel="stylesheet" href="~/Content/LoginCss/css/style.css">
+</head>
+<body>
+    <section class="ftco-section">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-6 text-center mb-5">
+                    <h2 class="heading-section"></h2>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-md-12 col-lg-10">
+                    <div class="wrap d-md-flex">
+                        <div class="text-wrap p-4 p-lg-5 text-center d-flex align-items-center order-md-last">
+                            <div class="text w-100">
+                                <h2>Welcome to login</h2>
+                                <p>Don't have an account?</p>
+                                <a href="/TaiKhoan/DangKy" class="btn btn-white btn-outline-white">Sign Up</a>
+                            </div>
+                        </div>
+                        <div style="width: 100%" class="login-wrap p-0 p-lg-5">
+                            <div class="d-flex">
+                                <div class="w-100">
+                                    <h3 class="mb-4">Sign In</h3>
+                                </div>
+                                <div class="w-100">
+                                    <p class="social-media d-flex justify-content-end">
+                                        <a href="#" class="social-icon d-flex align-items-center justify-content-center"><span class="fa fa-facebook"></span></a>
+                                        <a href="#" class="social-icon d-flex align-items-center justify-content-center"><span class="fa fa-twitter"></span></a>
+                                    </p>
+                                </div>
+                            </div>
+                            @using (Html.BeginForm("DangKy", "TaiKhoan", FormMethod.Post))
+                            {
+                             <div>
+                                <div class="form-group mb-3">
+                                    @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Username" } })
+                                    @Html.ValidationMessageFor(model => model.UserName)
+                                </div>
+                                <div class="row">
+                                    <div class="col-6 form-group mb-3">
+                                        @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", @placeholder = "Password" } })
+                                        @Html.ValidationMessageFor(model => model.Password)
+
+                                    </div>
+                                    <div class="col-6 form-group mb-3">
+                                        @Html.EditorFor(model => model.ConfirmPassword, new { htmlAttributes = new { @class = "form-control", @placeholder = "Nhập lại mật khẩu" } })
+                                        @Html.ValidationMessageFor(model => model.ConfirmPassword)
+
+                                    </div>
+                                </div>
+                                <div class="form-group mb-3">
+                                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @placeholder = "Email" } })
+                                    @Html.ValidationMessageFor(model => model.Email)
+
+                                </div>
+                                <div class="form-group mb-3">
+                                    @Html.EditorFor(model => model.SDT, new { htmlAttributes = new { @class = "form-control", @placeholder = "Số điện thoại" } })
+                                    @Html.ValidationMessageFor(model => model.SDT)
+
+                                </div>
+                                <div class="row">
+                                    <div class="form-group mb-3 col-7">
+                                        @Html.EditorFor(model => model.NgaySinh, new { htmlAttributes = new { @class = "form-control", @placeholder = "Ngày sinh", @type = "date" } })
+                                        @Html.ValidationMessageFor(model => model.NgaySinh)
+
+                                    </div>
+                                    <div class="col-5 d-flex align-items-center">
+                                        <div class="form-group d-flex">
+                                            <span>Giới tính:</span>
+                                            <div style="margin: 0 10px;" class="form-check">
+                                                @Html.RadioButtonFor(model => model.GioiTinh, true, new { @class = "form-check-input", id = "gioiTinhNam", @style = "position: relative; top: 6%;" })
+                                                <label class="form-check-label" for="gioiTinhNam">Nam</label>
+                                            </div>
+                                            <div class="form-check pt-0 pb-0">
+                                                @Html.RadioButtonFor(model => model.GioiTinh, false, new { @class = "form-check-input", id = "gioiTinhNu", @style = "position: relative; top: 6%;" })
+                                                <label class="form-check-label" for="gioiTinhNu">Nữ</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="form-control btn btn-primary submit px-3">Sign In</button>
+                            </div>
+                            <div class="form-group d-md-flex">
+                                <div class="w-50 text-left">
+                                    <label class="checkbox-wrap checkbox-primary mb-0">
+                                        Remember Me
+                                        <input type="checkbox" checked>
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+                                <div class="w-50 text-md-right">
+                                    <a href="#">Forgot Password</a>
+                                </div>
+                            </div>
+                        }
+                            <a class="" href="/TrangChu/TrangChu"><i style="margin-right: 2px" class="me-2 fa-solid fa-arrow-left"></i> Quay lại</a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            </div>
+            <div>
+            </div>
+        </section>
+
+        <script src="~/Script/LoginScripts/js/jquery.min.js"></script>
+        <script src="~/Script/LoginScripts/js/popper.js"></script>
+        <script src="~/Script/LoginScripts/js/bootstrap.min.js"></script>
+        <script src="~/Script/LoginScripts/js/main.js"></script>
+
+        @if (TempData["type"] != null)
+        {
+            <script>
+            var message = @Html.Raw(Json.Encode(TempData["type"]));
+            alert(`${message}`)
+            </script>
+        }
+
+    </body>
+</html>
 

@@ -202,7 +202,6 @@
     <Compile Include="Controllers\SanPhamChiTietsController.cs" />
     <Compile Include="Controllers\SanPhamsController.cs" />
     <Compile Include="Controllers\TaiKhoanController.cs" />
-    <Compile Include="Controllers\TaiKhoansController.cs" />
     <Compile Include="Controllers\TrangChuController.cs" />
     <Compile Include="Controllers\VaiTroesController.cs" />
     <Compile Include="Global.asax.cs">
@@ -268,6 +267,14 @@
     <Compile Include="Migrations\202501060516561_alterPriceFloatToInt.cs" />
     <Compile Include="Migrations\202501060516561_alterPriceFloatToInt.Designer.cs">
       <DependentUpon>202501060516561_alterPriceFloatToInt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202501111250467_alterThanhTienType.cs" />
+    <Compile Include="Migrations\202501111250467_alterThanhTienType.Designer.cs">
+      <DependentUpon>202501111250467_alterThanhTienType.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202501111254222_addNullAble.cs" />
+    <Compile Include="Migrations\202501111254222_addNullAble.Designer.cs">
+      <DependentUpon>202501111254222_addNullAble.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AnhSanPham.cs" />
@@ -446,11 +453,6 @@
     <Content Include="Views\SanPhams\Details.cshtml" />
     <Content Include="Views\SanPhams\Edit.cshtml" />
     <Content Include="Views\SanPhams\Index.cshtml" />
-    <Content Include="Views\TaiKhoans\Create.cshtml" />
-    <Content Include="Views\TaiKhoans\Delete.cshtml" />
-    <Content Include="Views\TaiKhoans\Details.cshtml" />
-    <Content Include="Views\TaiKhoans\Edit.cshtml" />
-    <Content Include="Views\TaiKhoans\Index.cshtml" />
     <Content Include="Views\VaiTroes\Create.cshtml" />
     <Content Include="Views\VaiTroes\Delete.cshtml" />
     <Content Include="Views\VaiTroes\Details.cshtml" />
@@ -576,6 +578,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202501060516561_alterPriceFloatToInt.resx">
       <DependentUpon>202501060516561_alterPriceFloatToInt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202501111250467_alterThanhTienType.resx">
+      <DependentUpon>202501111250467_alterThanhTienType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202501111254222_addNullAble.resx">
+      <DependentUpon>202501111254222_addNullAble.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -15,11 +15,11 @@ namespace ProjectQuanLyBanHang.Models
         public int GioHangId { get; set; }
         [Key, Column(Order = 1)]
         [DisplayName("Mã sản phẩm")]
-        public int SanPhamChiTietId { get; set; }
+        public int? SanPhamChiTietId { get; set; }
         [DisplayName("Số lượng")]
-        public int SoLuong { get; set; }
+        public int? SoLuong { get; set; }
         [DisplayName("Thành tiền")]
-        public decimal ThanhTien { get; set; }
+        public float ThanhTien { get; set; } = 0;
         public virtual SanPhamChiTiet SanPhamChiTiet { get; set; }
         public virtual GioHang GioHang{ get; set; }
 

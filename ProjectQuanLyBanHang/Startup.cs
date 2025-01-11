@@ -81,7 +81,9 @@ namespace ProjectQuanLyBanHang
                     userManager.AddToRole(user.Id, "Manager");
                 }
             }
- 
+
         }
+
+
     }
 }
