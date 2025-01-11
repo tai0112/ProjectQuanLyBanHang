@@ -188,6 +188,8 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\DefaultController.cs" />
     <Compile Include="Controllers\AnhSanPhamsController.cs" />
     <Compile Include="Controllers\CPUsController.cs" />
     <Compile Include="Controllers\DangNhapController.cs" />
@@ -367,6 +369,7 @@
     <Content Include="Content\LoginCss\css\.DS_Store" />
     <Content Include="Content\LoginCss\css\bootstrap\.DS_Store" />
     <Content Include="Content\LoginCss\css\bootstrap\mixins\.DS_Store" />
+    <Content Include="Areas\Admin\Views\web.config" />
     <None Include="Scripts\jquery-3.7.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.7.0.js" />
     <Content Include="Scripts\jquery-3.7.0.min.js" />
@@ -507,6 +510,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Admin\Data\" />
+    <Folder Include="Areas\Admin\Views\Default\" />
+    <Folder Include="Areas\Admin\Views\Shared\" />
     <Folder Include="Content\Images\AnhSanPham\" />
   </ItemGroup>
   <ItemGroup>
