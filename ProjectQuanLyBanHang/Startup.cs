@@ -18,7 +18,7 @@ namespace ProjectQuanLyBanHang
             app.UseCookieAuthentication(new CookieAuthenticationOptions()
             {
                 AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,
-                LoginPath = new PathString("/DangNhap/DangNhap")
+                LoginPath = new PathString("/TaiKhoan/DangNhap")
             });
             this.CreateRolesAndUsers();
         }
@@ -52,7 +52,7 @@ namespace ProjectQuanLyBanHang
                 roleManager.Create(role);
             }
 
-            if (userManager.FindByName("Admin") == null)
+            if (userManager.FindByName("admin") == null)
             {
                 var user = new AppUser();
                 user.UserName = "admin";
@@ -67,7 +67,7 @@ namespace ProjectQuanLyBanHang
                 }
             }
 
-            if (userManager.FindByName("Manager") == null)
+            if (userManager.FindByName("manager") == null)
             {
                 var user = new AppUser();
                 user.UserName = "manager";

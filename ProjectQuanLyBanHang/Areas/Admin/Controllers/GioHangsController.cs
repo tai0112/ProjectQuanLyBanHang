@@ -6,111 +6,118 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using ProjectQuanLyBanHang.Filters;
 using ProjectQuanLyBanHang.Models;
 
-namespace ProjectQuanLyBanHang.Controllers
+namespace ProjectQuanLyBanHang.Areas.Admin.Controllers
 {
-    public class VaiTroesController : Controller
+    [AdminAuthorization]
+    public class GioHangsController : Controller
     {
         private QuanLyBanHangDbContext db = new QuanLyBanHangDbContext();
 
-        // GET: VaiTroes
+        // GET: GioHangs
         public ActionResult Index()
         {
-            return View(db.vaiTros.ToList());
+            var gioHangs = db.gioHangs.Include(g => g.TaiKhoan);
+            return View(gioHangs.ToList());
         }
 
-        // GET: VaiTroes/Details/5
-        public ActionResult Details(string id)
+        // GET: GioHangs/Details/5
+        public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            VaiTro vaiTro = db.vaiTros.Find(id);
-            if (vaiTro == null)
+            GioHang gioHang = db.gioHangs.Find(id);
+            if (gioHang == null)
             {
                 return HttpNotFound();
             }
-            return View(vaiTro);
+            return View(gioHang);
         }
 
-        // GET: VaiTroes/Create
+        // GET: GioHangs/Create
         public ActionResult Create()
         {
+            ViewBag.TaiKhoanId = new SelectList(db.taiKhoans, "TaiKhoanId", "MaTaiKhoan");
             return View();
         }
 
-        // POST: VaiTroes/Create
+        // POST: GioHangs/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "MaVaiTro,TenVaiTro")] VaiTro vaiTro)
+        public ActionResult Create([Bind(Include = "GioHangId,TaiKhoanId,ThanhTien")] GioHang gioHang)
         {
             if (ModelState.IsValid)
             {
-                db.vaiTros.Add(vaiTro);
+                db.gioHangs.Add(gioHang);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(vaiTro);
+            ViewBag.TaiKhoanId = new SelectList(db.taiKhoans, "TaiKhoanId", "MaTaiKhoan", gioHang.TaiKhoanId);
+            return View(gioHang);
         }
 
-        // GET: VaiTroes/Edit/5
-        public ActionResult Edit(string id)
+        // GET: GioHangs/Edit/5
+        public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            VaiTro vaiTro = db.vaiTros.Find(id);
-            if (vaiTro == null)
+            GioHang gioHang = db.gioHangs.Find(id);
+            if (gioHang == null)
             {
                 return HttpNotFound();
             }
-            return View(vaiTro);
+            ViewBag.TaiKhoanId = new SelectList(db.taiKhoans, "TaiKhoanId", "MaTaiKhoan", gioHang.TaiKhoanId);
+            return View(gioHang);
         }
 
-        // POST: VaiTroes/Edit/5
+        // POST: GioHangs/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "MaVaiTro,TenVaiTro")] VaiTro vaiTro)
+        public ActionResult Edit([Bind(Include = "GioHangId,TaiKhoanId,ThanhTien")] GioHang gioHang)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(vaiTro).State = EntityState.Modified;
+                db.Entry(gioHang).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(vaiTro);
+            ViewBag.TaiKhoanId = new SelectList(db.taiKhoans, "TaiKhoanId", "MaTaiKhoan", gioHang.TaiKhoanId);
+            return View(gioHang);
         }
 
-        // GET: VaiTroes/Delete/5
-        public ActionResult Delete(string id)
+        // GET: GioHangs/Delete/5
+        public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            VaiTro vaiTro = db.vaiTros.Find(id);
-            if (vaiTro == null)
+            GioHang gioHang = db.gioHangs.Find(id);
+            if (gioHang == null)
             {
                 return HttpNotFound();
             }
-            return View(vaiTro);
+            return View(gioHang);
         }
 
-        // POST: VaiTroes/Delete/5
+        // POST: GioHangs/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(string id)
+        public ActionResult DeleteConfirmed(int id)
         {
-            VaiTro vaiTro = db.vaiTros.Find(id);
-            db.vaiTros.Remove(vaiTro);
+            GioHang gioHang = db.gioHangs.Find(id);
+            db.gioHangs.Remove(gioHang);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

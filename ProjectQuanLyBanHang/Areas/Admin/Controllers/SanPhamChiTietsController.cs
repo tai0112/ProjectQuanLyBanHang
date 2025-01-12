@@ -10,10 +10,12 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using AngleSharp.Text;
+using ProjectQuanLyBanHang.Filters;
 using ProjectQuanLyBanHang.Models;
 
-namespace ProjectQuanLyBanHang.Controllers
+namespace ProjectQuanLyBanHang.Areas.Admin.Controllers
 {
+    [AdminAuthorization]
     public class SanPhamChiTietsController : Controller
     {
         private QuanLyBanHangDbContext db = new QuanLyBanHangDbContext();

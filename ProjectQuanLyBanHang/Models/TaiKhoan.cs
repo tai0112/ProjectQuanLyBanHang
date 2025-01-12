@@ -15,6 +15,9 @@ namespace ProjectQuanLyBanHang.Models
         [DisplayName("Mã tài khoản")]
         [Required]
         public string MaTaiKhoan { get; set; }
+        [Required]
+        [DisplayName("Họ và tên")]
+        public string HoVaTen { get; set; }
         [DisplayName("Tên đăng nhập")]
         [Required]
         public string TenDangNhap { get; set; }
@@ -30,9 +33,6 @@ namespace ProjectQuanLyBanHang.Models
         [Required]
         [EmailAddress]
         public string Email { get; set; }
-        [DisplayName("Mã vai trò")]
-        [Required]
-        public string MaVaiTro { get; set; }
         [DisplayName("Giới tính")]
         [Required]
         public bool GioiTinh { get; set; }
@@ -43,7 +43,6 @@ namespace ProjectQuanLyBanHang.Models
         public DateTime NgaySinh { get; set; }
         [DisplayName("Ảnh đại diện")]
         public string AnhDaiDien { get; set; }
-        public virtual VaiTro VaiTro { get; set; }
         public virtual ICollection<HoaDon> HoaDons { get; set; }
     }
 }

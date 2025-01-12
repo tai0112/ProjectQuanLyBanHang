@@ -6,111 +6,96 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using ProjectQuanLyBanHang.Filters;
 using ProjectQuanLyBanHang.Models;
 
-namespace ProjectQuanLyBanHang.Controllers
+namespace ProjectQuanLyBanHang.Areas.Admin.Controllers
 {
-    public class HoaDonsController : Controller
+    [AdminAuthorization]
+    public class CPUsController : Controller
     {
         private QuanLyBanHangDbContext db = new QuanLyBanHangDbContext();
 
-        // GET: HoaDons
+        // GET: CPUs
         public ActionResult Index()
         {
-            return View(db.hoaDons.ToList());
+            return View(db.cpus.ToList());
         }
 
-        // GET: HoaDons/Details/5
+        // GET: CPUs/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            HoaDon hoaDon = db.hoaDons.Find(id);
-            if (hoaDon == null)
+            CPU cPU = db.cpus.Find(id);
+            if (cPU == null)
             {
                 return HttpNotFound();
             }
-            return View(hoaDon);
+            return View(cPU);
         }
 
-        // GET: HoaDons/Create
+        // GET: CPUs/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: HoaDons/Create
+        // POST: CPUs/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "HoaDonId,TaiKhoanId,MaHoaDon,TenHoaDon,ThanhTien,TrangThai,NgayThanhToan")] HoaDon hoaDon)
+        public ActionResult Create([Bind(Include = "CpuId,TenCpu,NhaSX,MoTa")] CPU cPU)
         {
             if (ModelState.IsValid)
             {
-                db.hoaDons.Add(hoaDon);
+                db.cpus.Add(cPU);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(hoaDon);
+            return View(cPU);
         }
 
-        // GET: HoaDons/Edit/5
+        // GET: CPUs/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            HoaDon hoaDon = db.hoaDons.Find(id);
-            if (hoaDon == null)
+            CPU cPU = db.cpus.Find(id);
+            if (cPU == null)
             {
                 return HttpNotFound();
             }
-            return View(hoaDon);
+            return View(cPU);
         }
 
-        // POST: HoaDons/Edit/5
+        // POST: CPUs/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "HoaDonId,TaiKhoanId,MaHoaDon,TenHoaDon,ThanhTien,TrangThai,NgayThanhToan")] HoaDon hoaDon)
+        public ActionResult Edit([Bind(Include = "CpuId,TenCpu,NhaSX,MoTa")] CPU cPU)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(hoaDon).State = EntityState.Modified;
+                db.Entry(cPU).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(hoaDon);
+            return View(cPU);
         }
 
-        // GET: HoaDons/Delete/5
+        // GET: CPUs/Delete/5
         public ActionResult Delete(int? id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            HoaDon hoaDon = db.hoaDons.Find(id);
-            if (hoaDon == null)
-            {
-                return HttpNotFound();
-            }
-            return View(hoaDon);
-        }
-
-        // POST: HoaDons/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            HoaDon hoaDon = db.hoaDons.Find(id);
-            db.hoaDons.Remove(hoaDon);
+            CPU cPU = db.cpus.Find(id);
+            db.cpus.Remove(cPU);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

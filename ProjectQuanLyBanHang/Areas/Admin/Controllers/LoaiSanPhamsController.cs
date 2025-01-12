@@ -9,10 +9,12 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Razor.Generator;
+using ProjectQuanLyBanHang.Filters;
 using ProjectQuanLyBanHang.Models;
 
-namespace ProjectQuanLyBanHang.Controllers
+namespace ProjectQuanLyBanHang.Areas.Admin.Controllers
 {
+    [AdminAuthorization]
     public class LoaiSanPhamsController : Controller
     {
         QuanLyBanHangDbContext db = new QuanLyBanHangDbContext();

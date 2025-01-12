@@ -50,60 +50,24 @@ namespace ProjectQuanLyBanHang.Controllers
                 taiKhoan.DienThoai = user.PhoneNumber;
                 taiKhoan.Email = user.Email;
                 taiKhoan.NgaySinh = (DateTime)user.NgaySinh;
+                db.taiKhoans.Add(taiKhoan);
 
                 var gioHang = new GioHang();
                 gioHang.TaiKhoanId = taiKhoan.TaiKhoanId;
-                var gioHangChiTiet = new GioHangChiTiet();
-                gioHangChiTiet.GioHangId = gioHang.GioHangId;
-                
+                db.gioHangs.Add(gioHang);
+
+                db.SaveChanges();
 
                 IdentityResult identity = userManager.Create(user);
                 if (identity.Succeeded)
                 {
-                    userManager.AddToRole(user.Id, "Customer");
-                    //Tạo một đối tượng xác thực nhằm thao tác với xác thực
-                    var authenManager = HttpContext.GetOwinContext().Authentication;
-
-                    //Tạo một đối tượng nhận dạng, dùng để lưu thông tin người dùng trong quá trình đăng nhập
-                    var userIdentity = userManager.CreateIdentity(user, DefaultAuthenticationTypes.ApplicationCookie);
-
-                    //Thực hiện đăng nhập người dùng với thông tin đã tạo ở trên
-                    authenManager.SignIn(new AuthenticationProperties(), userIdentity);
-
-                }else
-                {
-
+                    TempData["Success"] = "Tạo tài khoản thành công";
                 }
             }
 
-            return View();
+            return RedirectToAction("DangNhap", "TaiKhoan");
         }
 
-        [HttpPost]
-        public ActionResult DangKyMoi(RegisterVM rvm)
-        {
-            if (ModelState.IsValid)
-            {
-                var appDbContext = new AppDbContext();
-                var userStore = new AppUserStore(appDbContext);
-                var userManager = new AppUserManager(userStore);
-                string passHash = Crypto.HashPassword(rvm.Password);
-                var user = new AppUser()
-                {
-                    UserName = rvm.UserName,
-                    Email = rvm.Email,
-                    PasswordHash = passHash,
-                };
-
-                IdentityResult identity = userManager.Create(user);
-                if (identity.Succeeded)
-                {
-                    userManager.AddToRole(user.Id, "Customer");
-
-                }
-            }
-            return View();
-        }
 
         public ActionResult DangNhap()
         {
@@ -129,7 +93,14 @@ namespace ProjectQuanLyBanHang.Controllers
                     var authenManager = HttpContext.GetOwinContext().Authentication;
                     var userIdentity = userManager.CreateIdentity(user, DefaultAuthenticationTypes.ApplicationCookie);
                     authenManager.SignIn(new AuthenticationProperties(), userIdentity);
-                    return RedirectToAction("TrangChu", "TrangChu");
+                    if (userManager.IsInRole(user.Id, "Admin"))
+                    {
+                        return RedirectToAction("Index", "TrangChu", new { area = "Admin" });
+                    }
+                    else
+                    {
+                        return RedirectToAction("TrangChu", "TrangChu");
+                    }
                 }
             }
             return View();

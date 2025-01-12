@@ -23,7 +23,6 @@ namespace ProjectQuanLyBanHang.Models
         public DbSet<SanPham> sanPhams { get; set; }
         public DbSet<SanPhamChiTiet> sanPhamChiTiets { get; set; }
         public DbSet<TaiKhoan> taiKhoans { get; set; }
-        public DbSet<VaiTro> vaiTros { get; set; }
         public DbSet<Ram> rams { get; set; }
         public DbSet<CPU> cpus { get; set; }
         public DbSet<GPU> gpus { get; set; }

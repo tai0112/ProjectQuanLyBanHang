@@ -15,9 +15,11 @@ using System.Data.Common;
 using System.Diagnostics;
 using AngleSharp.Io;
 using System.Web.DynamicData;
+using ProjectQuanLyBanHang.Filters;
 
-namespace ProjectQuanLyBanHang.Controllers
+namespace ProjectQuanLyBanHang.Areas.Admin.Controllers
 {
+    [AdminAuthorization]
     public class SanPhamsController : Controller
     {
         QuanLyBanHangDbContext db = new QuanLyBanHangDbContext();

@@ -16,7 +16,8 @@ namespace ProjectQuanLyBanHang
             routes.MapRoute(
                 name: "TrangChu",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "TrangChu", action = "TrangChu", id = UrlParameter.Optional }
+                defaults: new { controller = "TrangChu", action = "TrangChu", id = UrlParameter.Optional },
+                namespaces: new[] { "ProjectQuanLyBanHang.Controllers" }
             );
         }
     }

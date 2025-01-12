@@ -189,23 +189,24 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
-    <Compile Include="Areas\Admin\Controllers\DefaultController.cs" />
-    <Compile Include="Controllers\AnhSanPhamsController.cs" />
-    <Compile Include="Controllers\CPUsController.cs" />
-    <Compile Include="Controllers\DangNhapController.cs" />
-    <Compile Include="Controllers\GioHangChiTietsController.cs" />
-    <Compile Include="Controllers\GioHangsController.cs" />
-    <Compile Include="Controllers\GPUsController.cs" />
-    <Compile Include="Controllers\HoaDonChiTietsController.cs" />
-    <Compile Include="Controllers\HoaDonsController.cs" />
-    <Compile Include="Controllers\LoaiSanPhamsController.cs" />
-    <Compile Include="Controllers\NhaCungCapsController.cs" />
-    <Compile Include="Controllers\RamsController.cs" />
-    <Compile Include="Controllers\SanPhamChiTietsController.cs" />
-    <Compile Include="Controllers\SanPhamsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\AnhSanPhamsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\CPUsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\GioHangChiTietsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\GioHangsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\GPUsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\HoaDonChiTietsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\HoaDonsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\LoaiSanPhamsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\NhaCungCapsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\RamsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\SanPhamChiTietsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\SanPhamsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\TaiKhoansController.cs" />
+    <Compile Include="Areas\Admin\Controllers\TrangChuController.cs" />
     <Compile Include="Controllers\TaiKhoanController.cs" />
     <Compile Include="Controllers\TrangChuController.cs" />
-    <Compile Include="Controllers\VaiTroesController.cs" />
+    <Compile Include="Filters\AdminAuthorization.cs" />
+    <Compile Include="Filters\MyAuthenFilter.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -278,10 +279,16 @@
     <Compile Include="Migrations\202501111254222_addNullAble.Designer.cs">
       <DependentUpon>202501111254222_addNullAble.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202501121458141_deleteRole.cs" />
+    <Compile Include="Migrations\202501121458141_deleteRole.Designer.cs">
+      <DependentUpon>202501121458141_deleteRole.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202501121554280_alterDisplayName.cs" />
+    <Compile Include="Migrations\202501121554280_alterDisplayName.Designer.cs">
+      <DependentUpon>202501121554280_alterDisplayName.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AnhSanPham.cs" />
-    <Compile Include="Models\BusinessClass\DataProvider.cs" />
-    <Compile Include="Models\BusinessClass\SanPhamBusiness.cs" />
     <Compile Include="Models\CPU.cs" />
     <Compile Include="Models\DataProvider.cs" />
     <Compile Include="Models\GioHang.cs" />
@@ -296,7 +303,6 @@
     <Compile Include="Models\SanPham.cs" />
     <Compile Include="Models\SanPhamChiTiet.cs" />
     <Compile Include="Models\TaiKhoan.cs" />
-    <Compile Include="Models\VaiTro.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModel\LoginVM.cs" />
@@ -370,6 +376,8 @@
     <Content Include="Content\LoginCss\css\bootstrap\.DS_Store" />
     <Content Include="Content\LoginCss\css\bootstrap\mixins\.DS_Store" />
     <Content Include="Areas\Admin\Views\web.config" />
+    <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Admin\Views\TrangChu\Index.cshtml" />
     <None Include="Scripts\jquery-3.7.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.7.0.js" />
     <Content Include="Scripts\jquery-3.7.0.min.js" />
@@ -432,87 +440,85 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
-    <Content Include="Views\Shared\_LayoutAdmin.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_LayoutAdmin.cshtml" />
     <Content Include="Scripts\js\._plugins" />
-    <Content Include="Views\AnhSanPhams\Create.cshtml" />
-    <Content Include="Views\AnhSanPhams\Delete.cshtml" />
-    <Content Include="Views\AnhSanPhams\Details.cshtml" />
-    <Content Include="Views\AnhSanPhams\Edit.cshtml" />
-    <Content Include="Views\AnhSanPhams\Index.cshtml" />
-    <Content Include="Views\GioHangs\Create.cshtml" />
-    <Content Include="Views\GioHangs\Delete.cshtml" />
-    <Content Include="Views\GioHangs\Details.cshtml" />
-    <Content Include="Views\GioHangs\Edit.cshtml" />
-    <Content Include="Views\GioHangs\Index.cshtml" />
-    <Content Include="Views\LoaiSanPhams\Create.cshtml" />
-    <Content Include="Views\LoaiSanPhams\Details.cshtml" />
-    <Content Include="Views\LoaiSanPhams\Edit.cshtml" />
-    <Content Include="Views\LoaiSanPhams\Index.cshtml" />
-    <Content Include="Views\NhaCungCaps\Create.cshtml" />
-    <Content Include="Views\NhaCungCaps\Details.cshtml" />
-    <Content Include="Views\NhaCungCaps\Edit.cshtml" />
-    <Content Include="Views\NhaCungCaps\Index.cshtml" />
-    <Content Include="Views\SanPhams\Create.cshtml" />
-    <Content Include="Views\SanPhams\Details.cshtml" />
-    <Content Include="Views\SanPhams\Edit.cshtml" />
-    <Content Include="Views\SanPhams\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\AnhSanPhams\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\AnhSanPhams\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\AnhSanPhams\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\AnhSanPhams\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\AnhSanPhams\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\GioHangs\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\GioHangs\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\GioHangs\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\GioHangs\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\GioHangs\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\LoaiSanPhams\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\LoaiSanPhams\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\LoaiSanPhams\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\LoaiSanPhams\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\NhaCungCaps\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\NhaCungCaps\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\NhaCungCaps\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\NhaCungCaps\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\SanPhams\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\SanPhams\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\SanPhams\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\SanPhams\Index.cshtml" />
     <Content Include="Views\VaiTroes\Create.cshtml" />
     <Content Include="Views\VaiTroes\Delete.cshtml" />
     <Content Include="Views\VaiTroes\Details.cshtml" />
     <Content Include="Views\VaiTroes\Edit.cshtml" />
     <Content Include="Views\VaiTroes\Index.cshtml" />
-    <Content Include="Views\DangNhap\DangNhap.cshtml" />
     <Content Include="Scripts\LoginScripts\js\.DS_Store" />
-    <Content Include="Views\CPUs\Create.cshtml" />
-    <Content Include="Views\CPUs\Details.cshtml" />
-    <Content Include="Views\CPUs\Edit.cshtml" />
-    <Content Include="Views\CPUs\Index.cshtml" />
-    <Content Include="Views\GPUs\Create.cshtml" />
-    <Content Include="Views\GPUs\Delete.cshtml" />
-    <Content Include="Views\GPUs\Details.cshtml" />
-    <Content Include="Views\GPUs\Edit.cshtml" />
-    <Content Include="Views\GPUs\Index.cshtml" />
-    <Content Include="Views\SanPhamChiTiets\Create.cshtml" />
-    <Content Include="Views\SanPhamChiTiets\Details.cshtml" />
-    <Content Include="Views\SanPhamChiTiets\Edit.cshtml" />
-    <Content Include="Views\SanPhamChiTiets\Index.cshtml" />
-    <Content Include="Views\Rams\Create.cshtml" />
-    <Content Include="Views\Rams\Delete.cshtml" />
-    <Content Include="Views\Rams\Details.cshtml" />
-    <Content Include="Views\Rams\Edit.cshtml" />
-    <Content Include="Views\Rams\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\CPUs\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\CPUs\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\CPUs\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\CPUs\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\GPUs\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\GPUs\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\GPUs\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\GPUs\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\GPUs\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\SanPhamChiTiets\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\SanPhamChiTiets\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\SanPhamChiTiets\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\SanPhamChiTiets\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Rams\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Rams\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Rams\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Rams\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Rams\Index.cshtml" />
     <Content Include="Views\Shared\_LayoutTrangChu.cshtml" />
     <Content Include="Views\TrangChu\TrangChu.cshtml" />
     <Content Include="Views\Shared\_Notification.cshtml" />
-    <Content Include="Views\HoaDonChiTiets\Create.cshtml" />
-    <Content Include="Views\HoaDonChiTiets\Delete.cshtml" />
-    <Content Include="Views\HoaDonChiTiets\Details.cshtml" />
-    <Content Include="Views\HoaDonChiTiets\Edit.cshtml" />
-    <Content Include="Views\HoaDonChiTiets\Index.cshtml" />
-    <Content Include="Views\GioHangChiTiets\Create.cshtml" />
-    <Content Include="Views\GioHangChiTiets\Delete.cshtml" />
-    <Content Include="Views\GioHangChiTiets\Details.cshtml" />
-    <Content Include="Views\GioHangChiTiets\Edit.cshtml" />
-    <Content Include="Views\GioHangChiTiets\Index.cshtml" />
-    <Content Include="Views\HoaDons\Create.cshtml" />
-    <Content Include="Views\HoaDons\Delete.cshtml" />
-    <Content Include="Views\HoaDons\Details.cshtml" />
-    <Content Include="Views\HoaDons\Edit.cshtml" />
-    <Content Include="Views\HoaDons\Index.cshtml" />
-    <Content Include="Views\SanPhamChiTiets\SanPhamChiTiet.cshtml" />
-    <Content Include="Views\SanPhams\ToanBoSanPham.cshtml" />
+    <Content Include="Areas\Admin\Views\HoaDonChiTiets\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\HoaDonChiTiets\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\HoaDonChiTiets\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\HoaDonChiTiets\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\HoaDonChiTiets\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\GioHangChiTiets\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\GioHangChiTiets\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\GioHangChiTiets\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\GioHangChiTiets\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\GioHangChiTiets\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\HoaDons\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\HoaDons\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\HoaDons\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\HoaDons\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\HoaDons\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\SanPhamChiTiets\SanPhamChiTiet.cshtml" />
+    <Content Include="Areas\Admin\Views\SanPhams\ToanBoSanPham.cshtml" />
     <Content Include="Views\Shared\_ram.cshtml" />
     <Content Include="Views\Shared\_cpu.cshtml" />
     <Content Include="Views\Shared\_gpu.cshtml" />
     <Content Include="Views\Shared\_ssd.cshtml" />
-    <Content Include="Views\TaiKhoan\DangKy.cshtml" />
     <Content Include="Views\TaiKhoan\DangNhap.cshtml" />
+    <Content Include="Views\TaiKhoan\DangKy.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Data\" />
-    <Folder Include="Areas\Admin\Views\Default\" />
-    <Folder Include="Areas\Admin\Views\Shared\" />
+    <Folder Include="Areas\Admin\Views\TaiKhoans\" />
     <Folder Include="Content\Images\AnhSanPham\" />
   </ItemGroup>
   <ItemGroup>
@@ -590,6 +596,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202501111254222_addNullAble.resx">
       <DependentUpon>202501111254222_addNullAble.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202501121458141_deleteRole.resx">
+      <DependentUpon>202501121458141_deleteRole.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202501121554280_alterDisplayName.resx">
+      <DependentUpon>202501121554280_alterDisplayName.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
