@@ -52,7 +52,7 @@
             <div class="container-list-laptop__gaming d-flex flex-wrap justify-content-between">
                 @foreach (var item in Model.Where(o => o.SanPham.MaLoaiSanPham == 37))
                 {
-                    <a class="" style="color: #333333" href="@Url.Action("SanPhamChiTiet", "SanPhamChiTiets", new { id = item.SanPhamChiTietId })">
+                    <a class="" style="color: #333333" href="@Url.Action("ChiTietSanPham", "SanPham", new { id = item.SanPhamChiTietId })">
                         <div class="laptop-gaming__item d-flex flex-column me-3">
                             <div class="title pb-2"></div>
                             <div class="laptop-gaming__img">
@@ -99,9 +99,61 @@
                             </div>
                         </div>
                     </a>
-
                 }
             </div>
+            <div class="container-list-laptop__gaming d-flex flex-wrap justify-content-between">
+                @foreach (var item in Model.Where(o => o.SanPham.MaLoaiSanPham == 38))
+                {
+                    <a class="" style="color: #333333" href="@Url.Action("ChiTietSanPham", "SanPham", new { id = item.SanPhamChiTietId })">
+                        <div class="laptop-gaming__item d-flex flex-column me-3">
+                            <div class="title pb-2"></div>
+                            <div class="laptop-gaming__img">
+                                @if (@item.SanPham.AnhSanPhams.FirstOrDefault() != null)
+                                {
+                                    <img class="img_laptop-gaming" src="~/Content/Images/AnhSanPham/@item.SanPham.AnhSanPhams.FirstOrDefault().UrlAnh" alt="Ảnh sản phẩm @item.SanPham.TenSanPham" />
+                                }
+                                else
+                                {
+                                    <img alt="Ảnh sản phẩm @item.SanPham.TenSanPham" />
+                                }
+                            </div>
+                            <div class="container-description">
+                                <div class="container-name-laptop">
+                                    <span style="font-size: 14px;">@item.SanPham.TenSanPham</span>
+                                </div>
+                                <div class="container-config">
+                                    <span class="container-config__item container-config__ram">
+                                        @Html.Partial("_ram")
+                                        <span>
+                                            @item.Ram.DungLuongRam<span>GB</span>
+                                        </span>
+                                    </span>
+                                    <span class="container-config__item container-config__cpu">
+                                        @Html.Partial("_cpu")
+                                        <span>
+                                            @item.CPU.TenCpu
+                                        </span>
+                                    </span>
+                                    <span class="container-config__item container-config__gpu">
+                                        @Html.Partial("_gpu")
+                                        <span>
+                                            @item.Gpu.TenGpu
+                                        </span>
+                                    </span>
+                                    <span class="container-config__item container-config__rom d-flex align-items-center">
+                                        @Html.Partial("_ssd")
+                                        <span class="ms-1 ssd">@item.SSD</span>
+                                    </span>
+                                </div>
+                                <div class="container-price">
+                                    <span style="color: var(--primary-color)" class="font-weight-bold price">@item.GiaTien</span>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                }
+            </div>
+
         </div>
     </div>
 </div>

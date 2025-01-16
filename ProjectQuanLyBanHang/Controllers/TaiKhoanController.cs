@@ -10,6 +10,7 @@ using Microsoft.Owin.Security;
 using ProjectQuanLyBanHang.Identity;
 using System.Web.UI.WebControls;
 using ProjectQuanLyBanHang.Models;
+using System.Diagnostics;
 
 namespace ProjectQuanLyBanHang.Controllers
 {
@@ -24,48 +25,54 @@ namespace ProjectQuanLyBanHang.Controllers
         [HttpPost]
         public ActionResult DangKy(RegisterVM register)
         {
-            if (ModelState.IsValid)
+            try
             {
-                var appDbContext = new AppDbContext();
-                var userStore = new AppUserStore(appDbContext);
-                var userManager = new AppUserManager(userStore);
-                var passHarsh = Crypto.HashPassword(register.Password);
-
-                var user = new AppUser()
+                if (ModelState.IsValid)
                 {
-                    Email = register.Email,
-                    UserName = register.UserName,
-                    PasswordHash = passHarsh,
-                    NgaySinh = register.NgaySinh,
-                    GioiTinh = register.GioiTinh,
-                    PhoneNumber = register.SDT
-                };
+                    var appDbContext = new AppDbContext();
+                    var userStore = new AppUserStore(appDbContext);
+                    var userManager = new AppUserManager(userStore);
+                    var passHarsh = Crypto.HashPassword(register.Password);
 
-                var taiKhoan = new TaiKhoan();
-                taiKhoan.MaTaiKhoan = user.Id;
-                taiKhoan.Email = user.Email;
-                taiKhoan.TenDangNhap = user.UserName;
-                taiKhoan.MatKhau = user.PasswordHash;
-                taiKhoan.GioiTinh = user.GioiTinh;
-                taiKhoan.DienThoai = user.PhoneNumber;
-                taiKhoan.Email = user.Email;
-                taiKhoan.NgaySinh = (DateTime)user.NgaySinh;
-                db.taiKhoans.Add(taiKhoan);
+                    var user = new AppUser()
+                    {
+                        HoVaTen = register.HoVaTen,
+                        Email = register.Email,
+                        UserName = register.UserName,
+                        PasswordHash = passHarsh,
+                        NgaySinh = register.NgaySinh,
+                        GioiTinh = register.GioiTinh,
+                        PhoneNumber = register.SDT
+                    };
 
-                var gioHang = new GioHang();
-                gioHang.TaiKhoanId = taiKhoan.TaiKhoanId;
-                db.gioHangs.Add(gioHang);
+                    var taiKhoan = new TaiKhoan();
+                    taiKhoan.HoVaTen = user.HoVaTen;
+                    taiKhoan.MaTaiKhoan = user.Id;
+                    taiKhoan.Email = user.Email;
+                    taiKhoan.TenDangNhap = user.UserName;
+                    taiKhoan.MatKhau = user.PasswordHash;
+                    taiKhoan.GioiTinh = user.GioiTinh;
+                    taiKhoan.DienThoai = user.PhoneNumber;
+                    taiKhoan.Email = user.Email;
+                    taiKhoan.NgaySinh = (DateTime)user.NgaySinh;
+                    db.taiKhoans.Add(taiKhoan);
+                    db.SaveChanges();
 
-                db.SaveChanges();
-
-                IdentityResult identity = userManager.Create(user);
-                if (identity.Succeeded)
-                {
-                    TempData["Success"] = "Tạo tài khoản thành công";
+                    IdentityResult identity = userManager.Create(user);
+                    if (identity.Succeeded)
+                    {
+                        TempData["Success"] = "Tạo tài khoản thành công";
+                    }
                 }
-            }
 
-            return RedirectToAction("DangNhap", "TaiKhoan");
+                return RedirectToAction("DangNhap", "TaiKhoan");
+
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+                return View();
+            }
         }
 
 

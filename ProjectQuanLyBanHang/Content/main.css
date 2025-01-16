@@ -12,6 +12,25 @@
     min-width: 100%;
 }
 
+.app-header__cart {
+    position: relative;
+}
+
+.count-product {
+    top: 0;
+    right: 36px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    font-size: 14px;
+    height: 17px;
+    width: 17px;
+    position: absolute;
+    background-color: #FDD835;
+    border-radius: 50%;
+    border: 1px solid #fff;
+}
+
 .icon-center {
     padding: 9px;
     color: #ccc;
@@ -25,24 +44,24 @@
     position: relative;
 }
 
-.sidebar-item:after {
-    height: 100%;
-    content: "";
-    padding: 10px 8px;
-    background-color: transparent;
-    position: absolute;
-    right: -13px;
-}
+    .sidebar-item:after {
+        height: 100%;
+        content: "";
+        padding: 10px 8px;
+        background-color: transparent;
+        position: absolute;
+        right: -13px;
+    }
 
-.sidebar-item:hover {
-    cursor: pointer;
-    background-color: var(--primary-color);
-    color: #fff;
-}
+    .sidebar-item:hover {
+        cursor: pointer;
+        background-color: var(--primary-color);
+        color: #fff;
+    }
 
-.sidebar-item:hover .megamenu {
-    display: block;
-}
+        .sidebar-item:hover .megamenu {
+            display: block;
+        }
 
 .megamenu {
     z-index: 1;
@@ -54,14 +73,14 @@
     width: calc(1320px - 210px);
 }
 
-.megamenu.active {
-    display: block;
-    transition: display 1s linear;
-}
+    .megamenu.active {
+        display: block;
+        transition: display 1s linear;
+    }
 
-.megamenu:hover {
-    display: block;
-}
+    .megamenu:hover {
+        display: block;
+    }
 
 .img-container {
     height: 375px;
@@ -158,10 +177,10 @@
     font-size: 24px;
 }
 
-.heading-container:hover {
-   color: var(--primary-color);
-   cursor: pointer;
-}
+    .heading-container:hover {
+        color: var(--primary-color);
+        cursor: pointer;
+    }
 
 .watch-all:hover {
     color: var(--primary-color);
@@ -175,7 +194,6 @@
 .container-content {
     border-radius: 5px;
     background-color: #fff;
-
 }
 
 .product-gallery {

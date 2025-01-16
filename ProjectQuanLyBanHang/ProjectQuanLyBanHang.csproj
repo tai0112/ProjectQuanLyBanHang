@@ -203,6 +203,8 @@
     <Compile Include="Areas\Admin\Controllers\SanPhamsController.cs" />
     <Compile Include="Areas\Admin\Controllers\TaiKhoansController.cs" />
     <Compile Include="Areas\Admin\Controllers\TrangChuController.cs" />
+    <Compile Include="Controllers\GioHangController.cs" />
+    <Compile Include="Controllers\SanPhamController.cs" />
     <Compile Include="Controllers\TaiKhoanController.cs" />
     <Compile Include="Controllers\TrangChuController.cs" />
     <Compile Include="Filters\AdminAuthorization.cs" />
@@ -213,6 +215,10 @@
     <Compile Include="IdentityMigration\202501101503458_init.cs" />
     <Compile Include="IdentityMigration\202501101503458_init.Designer.cs">
       <DependentUpon>202501101503458_init.cs</DependentUpon>
+    </Compile>
+    <Compile Include="IdentityMigration\202501150941000_addHoVaTen.cs" />
+    <Compile Include="IdentityMigration\202501150941000_addHoVaTen.Designer.cs">
+      <DependentUpon>202501150941000_addHoVaTen.cs</DependentUpon>
     </Compile>
     <Compile Include="IdentityMigration\Configuration.cs" />
     <Compile Include="Identity\AppDbContext.cs" />
@@ -287,8 +293,13 @@
     <Compile Include="Migrations\202501121554280_alterDisplayName.Designer.cs">
       <DependentUpon>202501121554280_alterDisplayName.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202501151055343_dropColumn.cs" />
+    <Compile Include="Migrations\202501151055343_dropColumn.Designer.cs">
+      <DependentUpon>202501151055343_dropColumn.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AnhSanPham.cs" />
+    <Compile Include="Models\Business\GioHangBusiness.cs" />
     <Compile Include="Models\CPU.cs" />
     <Compile Include="Models\DataProvider.cs" />
     <Compile Include="Models\GioHang.cs" />
@@ -514,12 +525,14 @@
     <Content Include="Views\Shared\_ssd.cshtml" />
     <Content Include="Views\TaiKhoan\DangNhap.cshtml" />
     <Content Include="Views\TaiKhoan\DangKy.cshtml" />
+    <Content Include="Views\SanPham\ChiTietSanPham.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Data\" />
     <Folder Include="Areas\Admin\Views\TaiKhoans\" />
     <Folder Include="Content\Images\AnhSanPham\" />
+    <Folder Include="Views\GioHang\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />
@@ -551,6 +564,9 @@
   <ItemGroup>
     <EmbeddedResource Include="IdentityMigration\202501101503458_init.resx">
       <DependentUpon>202501101503458_init.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="IdentityMigration\202501150941000_addHoVaTen.resx">
+      <DependentUpon>202501150941000_addHoVaTen.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202412200856475_CreateTable.resx">
       <DependentUpon>202412200856475_CreateTable.cs</DependentUpon>
@@ -602,6 +618,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202501121554280_alterDisplayName.resx">
       <DependentUpon>202501121554280_alterDisplayName.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202501151055343_dropColumn.resx">
+      <DependentUpon>202501151055343_dropColumn.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

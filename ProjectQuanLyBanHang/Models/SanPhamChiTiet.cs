@@ -38,6 +38,7 @@ namespace ProjectQuanLyBanHang.Models
         public virtual Ram Ram { get; set; }
         public virtual CPU CPU { get; set; }
         public virtual GPU Gpu { get; set; }
+        public virtual ICollection<GioHangChiTiet> GioHangChiTiets { get; set; }
         
     }
 }

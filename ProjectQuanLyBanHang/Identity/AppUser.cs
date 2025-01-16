@@ -9,6 +9,7 @@ namespace ProjectQuanLyBanHang.Identity
 {
     public class AppUser : IdentityUser
     {
+        public string HoVaTen { get; set; }
         public DateTime? NgaySinh { get; set; }
         public bool GioiTinh { get; set; }
         public string AnhDaiDien { get; set; }

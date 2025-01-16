@@ -39,7 +39,6 @@ namespace ProjectQuanLyBanHang.Models
         public int MaLoaiSanPham { get; set; } = 11;
         public virtual LoaiSanPham LoaiSanPham { get; set; }
         public virtual ICollection<HoaDonChiTiet> HoaDonChiTiets { get; set; }
-        public virtual ICollection<GioHangChiTiet> GioHangChiTiets { get; set; }
         public virtual ICollection<AnhSanPham> AnhSanPhams { get; set; }
         public virtual ICollection<SanPhamChiTiet> SanPhamChiTiets { get; set; }
         public virtual NhaCungCap NhaCungCap { get; set; }

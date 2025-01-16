@@ -9,6 +9,8 @@ namespace ProjectQuanLyBanHang.ViewModel
     public class RegisterVM
     {
         [Required]
+        public string HoVaTen { get; set; }
+        [Required]
         public string UserName { get; set; }
         [Required]
         public string Password { get; set; }
