@@ -128,36 +128,26 @@
                     </div>
                     <div class="col-12 mt-4">
                         <div class="container-content container-config-detail">
-                            <div class="container-heading relative-product">
+                            <div class="container-heading relative-product mb-2">
                                 Sản phẩm tương tự
                             </div>
-                            @*<div class="container-similar-product d-flex align-items-center">
-                                    <div class="container-image-product">
-                                        <img src="~/Content/Images/AnhSanPham/@Model.SanPham.AnhSanPhams.FirstOrDefault().UrlAnh" alt="Alternate Text">
-                                    </div>
-                                    <div class="container-similar-product-description d-flex flex-column">
-                                        <span class="product-similar-name">@Model.SanPham.TenSanPham @Model.SanPham.MaSanPham</span>
-                                        <span class="product-similar-price price">@Model.GiaTien</span>
-                                    </div>
-                                </div>*@
                             @foreach (var item in ViewBag.ProductSimilar)
                             {
-                                <div class="container-similar-product d-flex align-items-center">
-                                    <div class="container-image-product">
-                                        @if (item.SanPham.AnhSanPhams.Count > 0)
-                                        {
-                                            var anhSanPham = item.AnhSanPhams.Count > 0 ? item.AnhSanPhams.First() : null; ;
-                                            <img src="~/Content/Images/AnhSanPham/@anhSanPham.UrlAnh" alt="Alternate Text">
-                                        }else
-                                        {
-                                            <h1>Không có ảnh</h1>
-                                        }
+                                <a class="link-dark" href="@Url.Action("ChiTietSanPham", "SanPham", new { id = @item.SanPhamChiTietId })">
+                                    <div class="container-similar-product d-flex align-items-center">
+                                        <div class="container-image-product">
+                                            @foreach (var pic in item.SanPham.AnhSanPhams)
+                                            {
+                                                <img class="prodcut-img" src="~/Content/Images/AnhSanPham/@pic.UrlAnh" alt="Alternate Text">
+                                                break;
+                                            }
+                                        </div>
+                                        <div class="container-similar-product-description d-flex flex-column">
+                                            <span class="product-similar-name">@item.SanPham.TenSanPham @item.SanPham.MaSanPham</span>
+                                            <span class="product-similar-price price">@item.GiaTien</span>
+                                        </div>
                                     </div>
-                                    <div class="container-similar-product-description d-flex flex-column">
-                                        <span class="product-similar-name">@item.SanPham.TenSanPham @item.SanPham.MaSanPham</span>
-                                        <span class="product-similar-price price">@item.GiaTien</span>
-                                    </div>
-                                </div>
+                                </a>
                             }
                         </div>
                     </div>

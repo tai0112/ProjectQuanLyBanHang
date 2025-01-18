@@ -83,7 +83,7 @@
                 }
                 else
                 {
-                    
+
                     <span>@User.Identity.Name</span>
                     <a href="/TaiKhoan/DangXuat">Đăng xuất</a>
                 }
@@ -93,6 +93,141 @@
     <div style="padding-top: 80px">
         @Html.Partial("_Notification")
         @RenderBody()
+    </div>
+    <div class="footer mt-4">
+        <div class="container">
+            <div class="list-infor">
+                <div class="row">
+                    <div class="col-lg">
+                        <div class="heading-infor-item">Về gearvn</div>
+                        <ul class="list-item list-unstyled">
+                            <li class="detail-content item">
+                                Giới thiêu
+                            </li>
+                            <li class="detail-content item">
+                                Tuyển dụng
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-lg">
+                        <div class="heading-infor-item">Chính sách</div>
+                        <ul class="list-item list-unstyled">
+                            <li class="detail-content item">
+                                Chính sách bảo hành
+                            </li>
+                            <li class="detail-content item">
+                                Chính sách giao hàng
+                            </li>
+                            <li class="detail-content item">
+                                Chính sách bảo mật
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-lg">
+                        <div class="heading-infor-item">Thông tin</div>
+                        <ul class="list-item list-unstyled">
+                            <li class="detail-content item">
+                                Hệ thống cửa hàng
+                            </li>
+                            <li class="detail-content item">
+                                Hướng dẫn mua hàng
+                            </li>
+                            <li class="detail-content item">
+                                Hướng dẫn thanh toán
+                            </li>
+                            <li class="detail-content item">
+                                Hướng dẫn trả góp
+                            </li>
+                            <li class="detail-content item">
+                                Tra cứu địa chỉ bảo hành
+                            </li>
+                            <li class="detail-content item">
+                                Dịch vụ vệ sinh miễn phí
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-lg">
+                        <div class="heading-infor-item">Tổng đài hỗ trợ (8:00 - 21:00)</div>
+                        <ul class="list-item list-unstyled">
+                            <li class="detail-content item">
+                                Mua hàng: <span class="contact-info">1900.5301</span>
+                            </li>
+                            <li class="detail-content item">
+                                Bảo hành: <span class="contact-info">1099.5325</span>
+                            </li>
+                            <li class="detail-content item">
+                                Bảo hành: <span class="contact-info">1099.6173</span>
+                            </li>
+                            <li class="detail-content item">
+                                Bảo hành: <span class="contact-info">cskh@gearvn.com</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-lg">
+                        <div class="heading-infor-item">đơn vị vận chuyển</div>
+                        <div class="list-ship d-flex justify-content-between">
+                            <div>
+                                <img height="30" sizes="69px" src="~/Content/Images/DonViVanChuyen/ship_1.jpg" alt="Alternate Text" >
+                            </div>
+                            <div>
+                                <img height="30" sizes="69px" src="~/Content/Images/DonViVanChuyen/ship_2.jpg" alt="Alternate Text">
+                            </div>
+                            <div>
+                                <img height="30" sizes="69px" src="~/Content/Images/DonViVanChuyen/ship_3.jpg" alt="Alternate Text">
+                            </div>
+                            <div>
+                                <img height="30" sizes="69px" src="~/Content/Images/DonViVanChuyen/ship_4.jpg" alt="Alternate Text">
+                            </div>
+                        </div>
+                        <div class="heading-infor-item mt-3">Cách thức thanh toán</div>
+                        <div class="row list-pay">
+                            <div class="col-3">
+                                <img height="30" sizes="69px" src="~/Content/Images/PhuongThucThanhToan/pay_1.jpg" alt="">
+                            </div>
+                            <div class="col-3">
+                                <img height="30" sizes="69px" src="~/Content/Images/PhuongThucThanhToan/pay_2.jpg" alt="">
+                            </div>
+                            <div class="col-3">
+                                <img height="30" sizes="69px" src="~/Content/Images/PhuongThucThanhToan/pay_3.jpg" alt="">
+                            </div>
+                            <div class="col-3">
+                                <img height="30" sizes="69px" src="~/Content/Images/PhuongThucThanhToan/pay_4.jpg" alt="">
+                            </div>
+                            <div class="col-3">
+                                <img height="30" sizes="69px" src="~/Content/Images/PhuongThucThanhToan/pay_5.jpg" alt="">
+                            </div>
+                            <div class="col-3">
+                                <img height="30" sizes="69px" src="~/Content/Images/PhuongThucThanhToan/pay_6.jpg" alt="">
+                            </div>
+                            <div class="col-3">
+                                <img height="30" sizes="69px" src="~/Content/Images/PhuongThucThanhToan/pay_7.jpg" alt="">
+                            </div>
+                            <div class="col-3">
+                                <img height="30" sizes="69px" src="~/Content/Images/PhuongThucThanhToan/pay_8.jpg" alt="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr />
+            <div style="padding: 16px 0;">
+                <div class="d-flex align-items-center">
+                    <h4 class="footer-title text-uppercase" style="font-size: 14px;margin: 0; font-weight: 550">Kết nối với chúng tôi</h4>
+                    <div class="footer-content flex-grow-1 align-items-center justify-content-between d-flex ms-3">
+                        <div class="social-list">
+                            <a href=""><img width="32" height="32" src="~/Content/Images/AnhMangXaHoi/facebook_1_0e31d70174824ea184c759534430deec.jpg" alt="Alternate Text" /></a>
+                            <a href=""><img width="32" height="32" src="~/Content/Images/AnhMangXaHoi/tiktok-logo_fe1e020f470a4d679064cec31bc676e4.jpg" alt="Alternate Text" /></a>
+                            <a href=""><img width="32" height="32" src="~/Content/Images/AnhMangXaHoi/youtube_1_d8de1f41ca614424aca55aa0c2791684.jpg" alt="Alternate Text" /></a>
+                            <a href=""><img width="32" height="32" src="~/Content/Images/AnhMangXaHoi/icon_zalo__1__f5d6f273786c4db4a3157f494019ab1e.jpg" alt="Alternate Text" /></a>
+                            <a href=""><img width="32" height="32" src="~/Content/Images/AnhMangXaHoi/group_1_54d23abd89b74ead806840aa9458661d.jpg" alt="Alternate Text" /></a>
+                        </div>
+                        <div class="logo-footer">
+                            <img height="52" src="~/Content/Images/AnhMangXaHoi/logo-bct.jpg" alt="Alternate Text" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <script src="~/Scripts/Util.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/11.0.5/swiper-bundle.min.js" integrity="sha512-Ysw1DcK1P+uYLqprEAzNQJP+J4hTx4t/3X2nbVwszao8wD+9afLjBQYjz7Uk4ADP+Er++mJoScI42ueGtQOzEA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>

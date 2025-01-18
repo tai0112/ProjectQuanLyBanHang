@@ -38,6 +38,9 @@
     --font-family-sans-serif: "Roboto", serif;
     --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
+hr {
+    color: #c7c8c9;
+}
 
 *,
 *::before,
@@ -119,6 +122,7 @@
 }
 
 
+
 html {
     font-family: sans-serif;
     line-height: 1.15;
@@ -181,11 +185,11 @@ textarea {
 
 .content {
     width: 1024px;
-    max-height: 10lh;
+    max-height: 20.4lh;
     overflow: hidden;
     display: -webkit-box;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: 6;
+    -webkit-line-clamp: 10;
     transition: max-height 1s linear;
 }
 
@@ -244,5 +248,37 @@ td {
     font-size: 13px;
 }
 
+.footer {
+    background-color: #fff;
+}
 
+.heading-infor-item {
+    margin-bottom: 10px;
+    font-size: 14px;
+    text-transform: uppercase;
+    font-weight: 550;
+}
 
+.list-infor {
+    padding-top: 32px;
+}
+
+.list-item .detail-content.item {
+    font-size: 14px;
+    font-weight: 450;
+    padding-bottom: 8px;
+}
+
+.list-pay div {
+    margin-top: 6px;
+}
+
+.contact-info {
+    color: var(--link-color);
+    font-weight: 550;
+}
+
+.footer-title {
+    position: relative;
+    top: 2px;
+}

@@ -25,12 +25,8 @@ namespace ProjectQuanLyBanHang.Controllers
                 SanPhamChiTiet randomProduct = db.sanPhamChiTiets.Where(o => o.SanPham.TrangThai == true).OrderBy(o => o.SanPham.LoaiSanPham.MaLoaiSanPham).Skip(random).FirstOrDefault();
                 lstSanPhamChiTiet.Add(randomProduct);
             }
+            //var similarProduct = lstSanPhamChiTiet.Select(o => new{o.SanPham.TenSanPham, o.SanPham.MaSanPham, o.SanPham.AnhSanPhams.First().UrlAnh, o.SanPhamChiTietId, o.GiaTien}).ToList();
             ViewBag.ProductSimilar = lstSanPhamChiTiet;
-
-            foreach(var item in lstSanPhamChiTiet)
-            {
-                Debug.WriteLine(item.SanPham.AnhSanPhams.FirstOrDefault().UrlAnh);
-            }
             return View(sanPham);
         }
     }
