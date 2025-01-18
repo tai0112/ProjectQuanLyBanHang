@@ -69,25 +69,28 @@
                         <span>hàng</span>
                     </div>
                 </div>
-                <div class="app-header app-header__login d-flex">
-                    <div class="icon-content pe-2"><i class="fa-solid fa-user"></i></div>
-                    <a class="text-decoration-none text-white" href="/TaiKhoan/DangNhap">
-                        <div class="d-flex flex-column">
-                            <span class="lh-1">Đăng</span>
-                            <span class="">nhập</span>
-                        </div>
-                    </a>
-                </div>
+                @if (!User.Identity.IsAuthenticated)
+                {
+                    <div class="app-header app-header__login d-flex">
+                        <div class="icon-content pe-2"><i class="fa-solid fa-user"></i></div>
+                        <a class="text-decoration-none text-white" href="/TaiKhoan/DangNhap">
+                            <div class="d-flex flex-column">
+                                <span class="lh-1">Đăng</span>
+                                <span class="">nhập</span>
+                            </div>
+                        </a>
+                    </div>
+                }
+                else
+                {
+                    
+                    <span>@User.Identity.Name</span>
+                    <a href="/TaiKhoan/DangXuat">Đăng xuất</a>
+                }
             </div>
         </div>
     </div>
     <div style="padding-top: 80px">
-        @if (User.Identity.IsAuthenticated)
-        {
-            <h1>Hello @User.Identity.Name</h1>
-
-            <a href="/TaiKhoan/DangXuat">Đăng xuất</a>
-        }
         @Html.Partial("_Notification")
         @RenderBody()
     </div>

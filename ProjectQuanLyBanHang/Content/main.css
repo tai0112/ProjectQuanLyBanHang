@@ -122,6 +122,9 @@
 
 .container-name-laptop {
     font-weight: bold;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .container-config {
@@ -129,7 +132,7 @@
     flex-direction: column;
     border-radius: 6px;
     padding: 3px;
-    margin: 4px 0;
+    margin: 4px 0;  
     background-color: #ddd;
 }
 
@@ -261,4 +264,114 @@
 
 .slick-center img {
     border: 1px solid var(--primary-color);
+}
+
+.list-warranty-item {
+    margin-bottom: 5px;
+    font-size: 18px;
+    font-weight: 550;
+}
+
+.support-heading {
+    font-size: 18px;
+    font-weight: 550;
+}
+
+.promotion-list {
+    margin-top: 10px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+}
+
+.promotion-heading {
+    border-top-left-radius: 9px;
+    border-top-right-radius: 9px;
+    font-size: 18px;
+    padding: 10px 0;
+    padding-left: 15px;
+    font-weight: 450;
+    background-color: #ccc;
+}
+
+.container-promotion-item {
+}
+
+.promotion-price {
+    font-size: 14px;
+}
+
+.promotion-item {
+    display: flex;
+    margin-top: 10px;
+    padding-left: 15px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.check-icon {
+    margin-right: 5px;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: green;
+    color: #fff;
+    height: 17px;
+    width: 17px;
+    border-radius: 50%;
+}
+
+.container-info {
+    margin-top: 24px;
+}
+
+.promotion-price {
+    margin: 0 3px;
+}
+
+.container-heading {
+    font-size: 24px;
+    font-weight: 500;
+}
+
+.container-heading.description {
+    padding: 24px;
+}
+
+.container-config-product {
+    margin-top: 15px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+}
+
+.container-config-detail {
+    padding: 24px;
+}
+
+.container-config-detail span {
+    font-size: 14px;
+    text-transform: uppercase;
+    font-weight: 450;
+}
+
+.container-image-product {
+    width: 104px;
+    height: 104px;
+}
+
+.container-image-product img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.product-similar-name {
+    font-size: 14px;
+    font-weight: 450;   
+}
+
+.product-similar-price.price {
+    margin-top: 10px;
+    color: var(--primary-color);
+    font-size: 16px;
+    font-weight: 500;
 }

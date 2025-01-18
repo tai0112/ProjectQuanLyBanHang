@@ -185,7 +185,7 @@ textarea {
     overflow: hidden;
     display: -webkit-box;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: 3;
+    -webkit-line-clamp: 6;
     transition: max-height 1s linear;
 }
 
@@ -208,9 +208,11 @@ input:checked ~ .content {
     position: relative;
     cursor: pointer;
     left: 50%;
+    font-size: 16px;
+    font-weight: 500;
+    margin-top: 10px;
     transform: translateX(-50%);
     color: blue;
-    text-decoration: underline;
 }
 
 .readmore-label:hover {
@@ -222,11 +224,15 @@ input:checked ~ .content {
 }
 
 input:not(:checked) ~ .readmore-label:after {
-    content: "Read more";
+    font-size: 16px;
+    font-weight: 500;
+    content: "Đọc thêm bài viết";
 }
 
 input:checked ~ .readmore-label:after {
-    content: "Read less";
+    font-size: 16px;
+    font-weight: 500;
+    content: "Thu gọn bài viết ";
 }
 
 th {

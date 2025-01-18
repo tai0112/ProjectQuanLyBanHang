@@ -55,7 +55,114 @@
                         <p class="text-uppercase mt-3" style="font-size:18px; color:var(--primary-color);font-weight:bold;"><strong>Ưu đãi khi mua kèm pc</strong></p>
                         <p class="deal"><i class="fa-solid fa-star star-icon"></i> <span><strong>Ưu đãi lên đến 54% khi mua kèm PC </strong><a href="#">xem ngay tại đây</a></span></p>
                     </div>
+                    <div class="warranty">
+                        <ul class="list-warranty list-unstyled">
+                            <li class="list-warranty-item"><i class="fa-solid fa-check"></i> Bảo hành chính hảng 12 tháng</li>
+                            <li class="list-warranty-item"><i class="fa-solid fa-check"></i> Hỗ trợ đổi mới 7 ngày</li>
+                            <li class="list-warranty-item"><i class="fa-solid fa-check"></i> Windows bản quyền tích hợp</li>
+                        </ul>
+                    </div>
+                    <div class="support">
+                        <span style="color: var(--primary-color)" class="support-heading">
+                            Hỗ trợ trả góp MPOS (Thẻ tín dụng), <span class="text-uppercase">hdsaigon</span>
+                        </span>
+                        <div class="promotion-list">
+                            <div class="promotion-heading">
+                                <span>Khuyến mãi</span>
+                            </div>
+                            <ul class="container-promotion-item list-unstyled">
+                                <li class="promotion-item"><i class="check-icon fa-solid fa-check"></i> Giảm ngay <span class="promotion-price price">100000</span> khi mua kèm Microsoft Office kèm Laptop</li>
+                                <li class="promotion-item"><i class="check-icon fa-solid fa-check"></i> Giảm ngay <span class="promotion-price price">300000</span> khi mua kèm Microsoft Office kèm PC</li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-info">
+        <div class="row justify-content-between">
+            <div class="col-7">
+                <div class="container-content">
+                    <div class="container-heading description">
+                        Thông tin sản phẩm
+                    </div>
+                    <div>
+                        <input type="checkbox" class="readmore" name="readmore" value="" id="readmore" />
+                        <div class="content" style="max-width: 100%; padding: 0px 24px 24px 24px; font-size: 18px; font-weight: 450;">
+                            @Html.Raw(Model.SanPham.MoTa)
+                        </div>
+                        <label class="readmore-label" for="readmore"></label>
+                    </div>
+                </div>
+            </div>
+            <div class="col-5">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="container-content container-config-detail">
+                            <div class="container-heading config">
+                                Cấu hình
+                            </div>
+                            <div class="container-config-product">
+                                <table class="table-config table table-striped table-borderless m-0">
+                                    <tr>
+                                        <td><span>Ram</span></td>
+                                        <td><span>@Model.Ram.DungLuongRam</span><span>GB - @Model.Ram.LoaiRam</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><span>VGA</span></td>
+                                        <td><span>@Model.Gpu.TenGpu</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><span>CPU</span></td>
+                                        <td><span>@Model.CPU.TenCpu</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><span>SSD</span></td>
+                                        <td><span>@Model.SSD</span><span>GB</span></td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 mt-4">
+                        <div class="container-content container-config-detail">
+                            <div class="container-heading relative-product">
+                                Sản phẩm tương tự
+                            </div>
+                            @*<div class="container-similar-product d-flex align-items-center">
+                                    <div class="container-image-product">
+                                        <img src="~/Content/Images/AnhSanPham/@Model.SanPham.AnhSanPhams.FirstOrDefault().UrlAnh" alt="Alternate Text">
+                                    </div>
+                                    <div class="container-similar-product-description d-flex flex-column">
+                                        <span class="product-similar-name">@Model.SanPham.TenSanPham @Model.SanPham.MaSanPham</span>
+                                        <span class="product-similar-price price">@Model.GiaTien</span>
+                                    </div>
+                                </div>*@
+                            @foreach (var item in ViewBag.ProductSimilar)
+                            {
+                                <div class="container-similar-product d-flex align-items-center">
+                                    <div class="container-image-product">
+                                        @if (item.SanPham.AnhSanPhams.Count > 0)
+                                        {
+                                            var anhSanPham = item.AnhSanPhams.Count > 0 ? item.AnhSanPhams.First() : null; ;
+                                            <img src="~/Content/Images/AnhSanPham/@anhSanPham.UrlAnh" alt="Alternate Text">
+                                        }else
+                                        {
+                                            <h1>Không có ảnh</h1>
+                                        }
+                                    </div>
+                                    <div class="container-similar-product-description d-flex flex-column">
+                                        <span class="product-similar-name">@item.SanPham.TenSanPham @item.SanPham.MaSanPham</span>
+                                        <span class="product-similar-price price">@item.GiaTien</span>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
