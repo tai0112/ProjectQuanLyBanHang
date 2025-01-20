@@ -43,119 +43,77 @@
         </div>
     </div>
 
-    <div class="container mt-3 rounded-3 pt-4 pb-4" style="background-color: #fff">
-        <div class="container-laptop__gaming">
-            <div class="container-laptop__heading d-flex justify-content-between me-3 ms-3">
-                <span class="text-capitalize heading-container">Laptop gaming</span>
-                <a class="watch-all" style="font-size: 18px" href="#">Xem tất cả</a>
-            </div>
-            <div class="container-list-laptop__gaming d-flex flex-wrap justify-content-between">
-                @foreach (var item in Model.Where(o => o.SanPham.MaLoaiSanPham == 37))
-                {
-                    <a class="" style="color: #333333" href="@Url.Action("ChiTietSanPham", "SanPham", new { id = item.SanPhamChiTietId })">
-                        <div class="laptop-gaming__item d-flex flex-column me-3">
-                            <div class="title pb-2"></div>
-                            <div class="laptop-gaming__img">
-                                @if (@item.SanPham.AnhSanPhams.FirstOrDefault() != null)
-                                {
-                                    <img class="img_laptop-gaming" src="~/Content/Images/AnhSanPham/@item.SanPham.AnhSanPhams.FirstOrDefault().UrlAnh" alt="Ảnh sản phẩm @item.SanPham.TenSanPham" />
-                                }
-                                else
-                                {
-                                    <img alt="Ảnh sản phẩm @item.SanPham.TenSanPham" />
-                                }
-                            </div>
-                            <div class="container-description">
-                                <div class="container-name-laptop">
-                                    <span style="font-size: 14px;">@item.SanPham.TenSanPham</span>
-                                </div>
-                                <div class="container-config">
-                                    <span class="container-config__item container-config__ram">
-                                        @Html.Partial("_ram")
-                                        <span>
-                                            @item.Ram.DungLuongRam<span>GB</span>
-                                        </span>
-                                    </span>
-                                    <span class="container-config__item container-config__cpu">
-                                        @Html.Partial("_cpu")
-                                        <span>
-                                            @item.CPU.TenCpu
-                                        </span>
-                                    </span>
-                                    <span class="container-config__item container-config__gpu">
-                                        @Html.Partial("_gpu")
-                                        <span>
-                                            @item.Gpu.TenGpu
-                                        </span>
-                                    </span>
-                                    <span class="container-config__item container-config__rom d-flex align-items-center">
-                                        @Html.Partial("_ssd")
-                                        <span class="ms-1 ssd">@item.SSD</span>
-                                    </span>
-                                </div>
-                                <div class="container-price">
-                                    <span style="color: var(--primary-color)" class="font-weight-bold price">@item.GiaTien</span>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                }
-            </div>
-            <div class="container-list-laptop__gaming d-flex flex-wrap justify-content-between">
-                @foreach (var item in Model.Where(o => o.SanPham.MaLoaiSanPham == 38))
-                {
-                    <a title="@item.SanPham.TenSanPham" style="color: #333333;" href="@Url.Action("ChiTietSanPham", "SanPham", new { id = item.SanPhamChiTietId })">
-                        <div class="laptop-gaming__item d-flex flex-column me-3">
-                            <div class="title pb-2"></div>
-                            <div class="laptop-gaming__img">
-                                @if (@item.SanPham.AnhSanPhams.FirstOrDefault() != null)
-                                {
-                                    <img class="img_laptop-gaming" src="~/Content/Images/AnhSanPham/@item.SanPham.AnhSanPhams.FirstOrDefault().UrlAnh" alt="Ảnh sản phẩm @item.SanPham.TenSanPham" />
-                                }
-                                else
-                                {
-                                    <img alt="Ảnh sản phẩm @item.SanPham.TenSanPham" />
-                                }
-                            </div>
-                            <div class="container-description">
-                                <div class="container-name-laptop">
-                                    <span style="font-size: 14px;">@item.SanPham.TenSanPham</span>
-                                </div>
-                                <div class="container-config">
-                                    <span class="container-config__item container-config__ram">
-                                        @Html.Partial("_ram")
-                                        <span>
-                                            @item.Ram.DungLuongRam<span>GB</span>
-                                        </span>
-                                    </span>
-                                    <span class="container-config__item container-config__cpu">
-                                        @Html.Partial("_cpu")
-                                        <span>
-                                            @item.CPU.TenCpu
-                                        </span>
-                                    </span>
-                                    <span class="container-config__item container-config__gpu">
-                                        @Html.Partial("_gpu")
-                                        <span>
-                                            @item.Gpu.TenGpu
-                                        </span>
-                                    </span>
-                                    <span class="container-config__item container-config__rom d-flex align-items-center">
-                                        @Html.Partial("_ssd")
-                                        <span class="ms-1 ssd">@item.SSD</span>
-                                    </span>
-                                </div>
-                                <div class="container-price">
-                                    <span style="color: var(--primary-color)" class="font-weight-bold price">@item.GiaTien</span>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                }
-            </div>
+    @foreach (var loaiSanPham in ViewBag.LoaiSanPham)
+    {
 
+        var lstSanPham = Model.Where(o => o.SanPham.MaLoaiSanPham == loaiSanPham.MaLoaiSanPham);
+        if (lstSanPham.Count() == 0)
+        {
+            continue;
+        }
+
+        <div class="container mt-3 rounded-3 pt-4 pb-4" style="background-color: #fff">
+            <div class="container-laptop__gaming">
+                <div class="container-laptop__heading d-flex justify-content-between me-3 ms-3">
+                    <span class="text-capitalize heading-container">@loaiSanPham.TenLoaiSanPham</span>
+                    <a class="watch-all" style="font-size: 18px" href="@Url.Action("ToanBoSanPham", "SanPham", new { maLoaiSanPham = @loaiSanPham.MaLoaiSanPham })">Xem tất cả</a>
+                </div>
+                <div class="container-list-laptop__gaming d-flex flex-wrap justify-content-between">
+                    @foreach (var item in lstSanPham.OrderBy(o => o.SanPham.MaLoaiSanPham))
+                    {
+                        <a title="@item.SanPham.TenSanPham" style="color: #333333;" href="@Url.Action("ChiTietSanPham", "SanPham", new { id = item.SanPhamChiTietId })">
+                            <div class="laptop-gaming__item d-flex flex-column me-3">
+                                <div class="title pb-2"></div>
+                                <div class="laptop-gaming__img">
+                                    @if (@item.SanPham.AnhSanPhams.FirstOrDefault() != null)
+                                    {
+                                        <img class="img_laptop-gaming" src="~/Content/Images/AnhSanPham/@item.SanPham.AnhSanPhams.FirstOrDefault().UrlAnh" alt="Ảnh sản phẩm @item.SanPham.TenSanPham" />
+                                    }
+                                    else
+                                    {
+                                        <img alt="Ảnh sản phẩm @item.SanPham.TenSanPham" />
+                                    }
+                                </div>
+                                <div class="container-description">
+                                    <div class="container-name-laptop">
+                                        <span style="font-size: 14px;">@item.SanPham.TenSanPham</span>
+                                    </div>
+                                    <div class="container-config">
+                                        <span class="container-config__item container-config__ram">
+                                            @Html.Partial("_ram")
+                                            <span>
+                                                @item.Ram.DungLuongRam<span>GB</span>
+                                            </span>
+                                        </span>
+                                        <span class="container-config__item container-config__cpu">
+                                            @Html.Partial("_cpu")
+                                            <span>
+                                                @item.CPU.TenCpu
+                                            </span>
+                                        </span>
+                                        <span class="container-config__item container-config__gpu">
+                                            @Html.Partial("_gpu")
+                                            <span>
+                                                @item.Gpu.TenGpu
+                                            </span>
+                                        </span>
+                                        <span class="container-config__item container-config__rom d-flex align-items-center">
+                                            @Html.Partial("_ssd")
+                                            <span class="ms-1 ssd">@item.SSD</span>
+                                        </span>
+                                    </div>
+                                    <div class="container-price">
+                                        <span style="color: var(--primary-color)" class="font-weight-bold price">@item.GiaTien</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    }
+                </div>
+            </div>
         </div>
-    </div>
+    }
+
 </div>
 
 @Styles.Render("~/Content/css")

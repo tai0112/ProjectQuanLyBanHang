@@ -185,7 +185,7 @@ textarea {
 
 .content {
     width: 1024px;
-    max-height: 20.4lh;
+    max-height: 20.7lh;
     overflow: hidden;
     display: -webkit-box;
     -webkit-box-orient: vertical;
@@ -249,6 +249,10 @@ td {
 }
 
 .footer {
+    position: relative;
+    bottom: 0;
+    left: 0;
+    right: 0;
     background-color: #fff;
 }
 

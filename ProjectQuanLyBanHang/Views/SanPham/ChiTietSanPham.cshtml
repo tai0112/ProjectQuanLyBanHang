@@ -1,7 +1,7 @@
 ﻿@model ProjectQuanLyBanHang.Models.SanPhamChiTiet
 
 @{
-    ViewBag.Title = "SanPhamChiTiet";
+    ViewBag.Title = "Chi tiết sản phẩm " + Model.SanPham.TenSanPham;
     Layout = "~/Views/Shared/_LayoutTrangChu.cshtml";
 }
 <div class="container">
@@ -15,7 +15,7 @@
                     <div class="hightlight-image">
                         @foreach (var item in Model.SanPham.AnhSanPhams)
                         {
-                            <img src="~/Content/Images/AnhSanPham/@item.UrlAnh" alt="@item.TenAnh" />
+                            <img style="object-fit: cover;" src="~/Content/Images/AnhSanPham/@item.UrlAnh" alt="@item.TenAnh" />
                         }
                     </div>
                     <div class="slider-image">

@@ -21,7 +21,6 @@ namespace ProjectQuanLyBanHang.Models
         public string TenSanPham { get; set; }
         [AllowHtml]
         [DisplayName("Mô tả")]
-        [Required]
         public string MoTa { get; set; }
         [Required]
         [DisplayName("Trạng thái")]

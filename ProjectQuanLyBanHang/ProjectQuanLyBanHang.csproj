@@ -297,6 +297,14 @@
     <Compile Include="Migrations\202501151055343_dropColumn.Designer.cs">
       <DependentUpon>202501151055343_dropColumn.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202501200743338_dropRequireMoTa.cs" />
+    <Compile Include="Migrations\202501200743338_dropRequireMoTa.Designer.cs">
+      <DependentUpon>202501200743338_dropRequireMoTa.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202501201517381_addSoLuongToSanPhamChiTiet.cs" />
+    <Compile Include="Migrations\202501201517381_addSoLuongToSanPhamChiTiet.Designer.cs">
+      <DependentUpon>202501201517381_addSoLuongToSanPhamChiTiet.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AnhSanPham.cs" />
     <Compile Include="Models\Business\GioHangBusiness.cs" />
@@ -544,6 +552,7 @@
     <Content Include="Views\TaiKhoan\DangNhap.cshtml" />
     <Content Include="Views\TaiKhoan\DangKy.cshtml" />
     <Content Include="Views\SanPham\ChiTietSanPham.cshtml" />
+    <Content Include="Views\SanPham\ToanBoSanPham.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -639,6 +648,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202501151055343_dropColumn.resx">
       <DependentUpon>202501151055343_dropColumn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202501200743338_dropRequireMoTa.resx">
+      <DependentUpon>202501200743338_dropRequireMoTa.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202501201517381_addSoLuongToSanPhamChiTiet.resx">
+      <DependentUpon>202501201517381_addSoLuongToSanPhamChiTiet.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

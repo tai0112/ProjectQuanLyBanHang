@@ -1,0 +1,112 @@
+﻿@model IEnumerable<ProjectQuanLyBanHang.Models.SanPhamChiTiet>
+
+
+@{
+    if (Model.Count() > 0)
+    {
+        ViewBag.Title = "Toàn bộ sản phẩm " + Model.First().SanPham.LoaiSanPham.TenLoaiSanPham;
+    }
+    else
+    {
+        ViewBag.Title = "Không tìm thấy sản phẩm phù hợp";
+    }
+}
+
+<div class="container">
+    <div class="navigator pt-3 pb-3">
+        <a class="navbar-link" href="/TrangChu/TrangChu"><b><i class="fa-solid fa-house"></i> Trang chủ  &nbsp;/ </b>&nbsp;</a><a class="navbar-link" href="">
+            @if (Model.Count() > 0)
+            {<b class="font-weight-bold">Toàn bộ sản phẩm @Model.First().SanPham.LoaiSanPham.TenLoaiSanPham </b>}
+        </a>
+    </div>
+    <div class="img-thumbnail">
+        <img src="#" alt="Alternate Text" />
+    </div>
+
+    <div class="container rounded-3 pt-4 pb-4 mt-3" style="background-color: #fff; min-height: 448px">
+        <div class="filter-product">
+            @using (Html.BeginForm("ToanBoSanPham", "SanPham", FormMethod.Get, new { @class = "d-flex" }))
+            {
+                if (Model.Count() > 0)
+                {
+                    <input hidden name="MaLoaiSanPham" value="@Model.FirstOrDefault().SanPham.LoaiSanPham.MaLoaiSanPham">
+                }
+                else
+                {
+                    <input hidden name="MaLoaiSanPham" value="@ViewBag.MaLoaiSanPham">
+                }
+                @Html.DropDownList("tinhTrangHang", null, htmlAttributes: new { @class = "filter-select" })
+
+                @Html.DropDownList("NhaCungCap", null, "Nhà cung cấp", htmlAttributes: new { @class = "filter-select" })
+
+
+                @Html.DropDownList("ram", null, htmlAttributes: new { @class = "filter-select" })
+
+                @Html.DropDownList("ssd", null, htmlAttributes: new { @class = "filter-select" })
+
+                <button class="btn-filter">Lọc sản phẩm</button>
+            }
+        </div>
+        <hr />
+        <div class="container-list-laptop__gaming d-flex flex-wrap">
+            @if (Model.Count() > 0)
+            {
+                foreach (var item in Model.OrderBy(o => o.SanPham.MaLoaiSanPham))
+                {
+                    <a class="mt-4 container-laptop" title="@item.SanPham.TenSanPham" style="color: #333333;" href="@Url.Action("ChiTietSanPham", "SanPham", new { id = item.SanPhamChiTietId })">
+                        <div class="laptop-gaming__item d-flex flex-column me-3">
+                            <div class="title pb-2"></div>
+                            <div class="laptop-gaming__img">
+                                @if (@item.SanPham.AnhSanPhams.FirstOrDefault() != null)
+                                {
+                                    <img class="img_laptop-gaming" src="~/Content/Images/AnhSanPham/@item.SanPham.AnhSanPhams.FirstOrDefault().UrlAnh" alt="Ảnh sản phẩm @item.SanPham.TenSanPham" />
+                                }
+                                else
+                                {
+                                    <img alt="Ảnh sản phẩm @item.SanPham.TenSanPham" />
+                                }
+                            </div>
+                            <div class="container-description">
+                                <div class="container-name-laptop">
+                                    <span style="font-size: 14px;">@item.SanPham.TenSanPham</span>
+                                </div>
+                                <div class="container-config">
+                                    <span class="container-config__item container-config__ram">
+                                        @Html.Partial("_ram")
+                                        <span>
+                                            @item.Ram.DungLuongRam<span>GB</span>
+                                        </span>
+                                    </span>
+                                    <span class="container-config__item container-config__cpu">
+                                        @Html.Partial("_cpu")
+                                        <span>
+                                            @item.CPU.TenCpu
+                                        </span>
+                                    </span>
+                                    <span class="container-config__item container-config__gpu">
+                                        @Html.Partial("_gpu")
+                                        <span>
+                                            @item.Gpu.TenGpu
+                                        </span>
+                                    </span>
+                                    <span class="container-config__item container-config__rom d-flex align-items-center">
+                                        @Html.Partial("_ssd")
+                                        <span class="ms-1 ssd">@item.SSD</span>
+                                    </span>
+                                </div>
+                                <div class="container-price">
+                                    <span style="color: var(--primary-color)" class="font-weight-bold price">@item.GiaTien</span>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                }
+            }
+            else
+            {
+                <h3 style="flex-grow: 1; text-align: center; margin-top: 30px">Không tìm thấy sản phẩm phù hợp</h3>
+            }
+        </div>
+    </div>
+</div>
+

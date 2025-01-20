@@ -34,6 +34,8 @@ namespace ProjectQuanLyBanHang.Models
         public int GpuId { get; set; }
         [DisplayName("SSD")]
         public int SSD { get; set; } = 512;
+        [DisplayName("Số lượng")]
+        public int? SoLuong { get; set; } = 0;
         public virtual SanPham SanPham { get; set; }
         public virtual Ram Ram { get; set; }
         public virtual CPU CPU { get; set; }
