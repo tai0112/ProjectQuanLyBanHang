@@ -24,8 +24,9 @@ namespace ProjectQuanLyBanHang.Controllers
             {
                 var userIdentity = User.Identity.GetUserId();
                 var gioHang = db.gioHangs.Where(o => o.TaiKhoan.MaTaiKhoan == userIdentity).FirstOrDefault();
-                var sanPhamTrongGio = db.gioHangChiTiets.Count(o => o.GioHangId == gioHang.GioHangId);
-                ViewBag.SanPhamTrongGio = sanPhamTrongGio;
+                var sanPhamTrongGio = db.gioHangChiTiets.Where(o => o.GioHangId == gioHang.GioHangId).Sum(o => o.SoLuong);
+                Session["SoLuongSanPham"] = sanPhamTrongGio;
+                ViewBag.TaiKhoanId = userIdentity;
             }
             var loaiSanPham = db.loaiSanPhams.ToList();
             var laptop = db.sanPhamChiTiets.Where(o => o.SanPham.TrangThai == true).ToList();

@@ -21,7 +21,7 @@ namespace ProjectQuanLyBanHang.Models.Business
             db.SaveChanges();
         }
 
-        public void ThemSanPhamVaoGio(int taiKhoanId, int sanPhamId)
+        public void ThemSanPhamVaoGio(int taiKhoanId, int sanPhamId, bool giamSoLuong = false, bool tangSoLuong = false)
         {
             GioHang gh = db.gioHangs.Where(o => o.TaiKhoanId == taiKhoanId).FirstOrDefault();
             SanPhamChiTiet spct = db.sanPhamChiTiets.Where(o => o.SanPhamChiTietId == sanPhamId).FirstOrDefault();
@@ -33,8 +33,15 @@ namespace ProjectQuanLyBanHang.Models.Business
             GioHangChiTiet ghct = db.gioHangChiTiets.Where(o => o.SanPhamChiTietId == sanPhamId).FirstOrDefault();
             if (ghct != null)
             {
-                ghct.SoLuong = ghct.SoLuong++;
-                ghct.ThanhTien = (float)(ghct.SoLuong * spct.GiaTien);
+                if (tangSoLuong == true)
+                {
+                    ghct.SoLuong = ghct.SoLuong + 1;
+                }
+                else if (giamSoLuong == true)
+                {
+                    ghct.SoLuong = ghct.SoLuong - 1;
+                }
+                ghct.ThanhTien = (int)(ghct.SoLuong * spct.GiaTien);
                 db.Entry(ghct).State = EntityState.Modified;
             }
             else
@@ -47,8 +54,8 @@ namespace ProjectQuanLyBanHang.Models.Business
                     ThanhTien = spct.GiaTien
                 };
                 db.gioHangChiTiets.Add(ghct);
-                db.SaveChanges();
             }
+            db.SaveChanges();
         }
 
         public void SuaGioHang(int sanPhamId, int taiKhoanId, int soLuong)

@@ -19,7 +19,7 @@ namespace ProjectQuanLyBanHang.Models
         [DisplayName("Số lượng")]
         public int? SoLuong { get; set; }
         [DisplayName("Thành tiền")]
-        public float ThanhTien { get; set; } = 0;
+        public int ThanhTien { get; set; } = 0;
         public virtual SanPhamChiTiet SanPhamChiTiet { get; set; }
         public virtual GioHang GioHang{ get; set; }
 

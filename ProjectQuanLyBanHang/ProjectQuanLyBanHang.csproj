@@ -305,6 +305,10 @@
     <Compile Include="Migrations\202501201517381_addSoLuongToSanPhamChiTiet.Designer.cs">
       <DependentUpon>202501201517381_addSoLuongToSanPhamChiTiet.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202501222240438_alterDataTypeOfThanhTienGioHang.cs" />
+    <Compile Include="Migrations\202501222240438_alterDataTypeOfThanhTienGioHang.Designer.cs">
+      <DependentUpon>202501222240438_alterDataTypeOfThanhTienGioHang.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AnhSanPham.cs" />
     <Compile Include="Models\Business\GioHangBusiness.cs" />
@@ -350,6 +354,7 @@
     <Content Include="Content\Images\AnhBia\209361.jpg" />
     <Content Include="Content\Images\AnhBia\5817852-3840x2160-desktop-hd-motivational-wallpaper-photo.jpg" />
     <Content Include="Content\Images\AnhBia\Italy_Lake_Mountains_Forests_Scenery_Fusine_Lakes_612958_3840x2160.jpg" />
+    <Content Include="Content\Images\AnhBia\vivobook_banner_web_collection_1920x420_2048x2048.jpg" />
     <Content Include="Content\Images\AnhBia\wallhaven-4vyvy8.jpg" />
     <Content Include="Content\Images\AnhBia\wallhaven-qz76y7.png" />
     <Content Include="Content\Images\AnhLoaiSanPham\2in1.jpg" />
@@ -553,13 +558,13 @@
     <Content Include="Views\TaiKhoan\DangKy.cshtml" />
     <Content Include="Views\SanPham\ChiTietSanPham.cshtml" />
     <Content Include="Views\SanPham\ToanBoSanPham.cshtml" />
+    <Content Include="Views\GioHang\GioHang.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Data\" />
     <Folder Include="Areas\Admin\Views\TaiKhoans\" />
     <Folder Include="Content\Images\AnhSanPham\" />
-    <Folder Include="Views\GioHang\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />
@@ -654,6 +659,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202501201517381_addSoLuongToSanPhamChiTiet.resx">
       <DependentUpon>202501201517381_addSoLuongToSanPhamChiTiet.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202501222240438_alterDataTypeOfThanhTienGioHang.resx">
+      <DependentUpon>202501222240438_alterDataTypeOfThanhTienGioHang.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

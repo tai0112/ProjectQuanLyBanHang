@@ -41,7 +41,7 @@
                         </div>
                     </div>
                     <div>
-                        @using (Html.BeginForm("ThemVaoGioHang", "GioHang", FormMethod.Get))
+                        @using (Html.BeginForm("GioHang", "GioHang", FormMethod.Get))
                         {
                             <input hidden name="sanPhamId" value="@Model.SanPhamChiTietId">
                             <button type="submit" class="col-6 btn d-flex flex-column align-items-center mt-3" style=" padding: 10px; font-size: 18px; color: #fff; background-color: var(--primary-color)">

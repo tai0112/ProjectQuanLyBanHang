@@ -1,0 +1,45 @@
+﻿@model IEnumerable<ProjectQuanLyBanHang.Models.GioHangChiTiet>
+
+@{
+    ViewBag.Title = "GioHang";
+}
+
+<div class="container text-center">
+    <div class="layout-cart">
+        <div style="text-align: start;">
+            <a class="empty-cart-link" href="@Url.Action("ToanBoSanPham", "SanPham", new { maLoaiSanPham = 0})"><i class="fa-solid fa-angle-left"></i> Mua thêm sản phẩm khác</a>
+
+        </div>
+        <div class="cart-main">
+            <div class="sestion-step"></div>
+            @foreach (var item in Model)
+            {
+                <div class="cart-info">
+                    <div class="left">
+                        <a href="@Url.Action("ChiTietSanPham", "SanPham", new { id = item.SanPhamChiTietId})">
+                            <div class="cart-image-product">
+                                <img class="img-product" src="~/Content/Images/AnhSanPham/@item.SanPhamChiTiet.SanPham.AnhSanPhams.FirstOrDefault().UrlAnh" alt="@item.SanPhamChiTiet.SanPham.TenSanPham">
+                            </div>
+                        </a>
+                        <div class="delete-cart">
+                            <a href="@Url.Action("Xoa", "GioHang", new {maSanPhamChiTietId = item.SanPhamChiTietId})"> <span><i class="fa-solid fa-trash-can"></i> Xóa</span></a>
+                        </div>
+                    </div>
+                    <div class="right cart-description-product">
+                        <span class="cart-description-product name">@item.SanPhamChiTiet.SanPham.TenSanPham @item.SanPhamChiTiet.SanPham.MaSanPham</span>
+                    </div>
+                        <form class="d-flex" action="/GioHang/ThemVaoGioHang" method="post">
+                            <a class="quantity-button decrease" href="@Url.Action("ThemVaoGioHang", "GioHang", new { giamSoLuong = true, sanPhamId = item.SanPhamChiTietId })"><i class="fa-solid fa-minus"></i></a>
+                            <input class="quantity" type="text" disabled name="sanPhamId" value="@item.SoLuong">
+                            <a class="quantity-button increase" href="@Url.Action("ThemVaoGioHang", "GioHang", new { tangSoLuong = true, sanPhamId = item.SanPhamChiTietId })"><i class="fa-solid fa-plus"></i></a>
+                        </form>
+                        <div class="d-none">@item.ThanhTien</div>
+                </div>
+            }
+            <div class="total"><span class="price">@Model.Sum(o => o.ThanhTien)</span></div>
+        </div>
+    </div>
+
+</div>
+
+

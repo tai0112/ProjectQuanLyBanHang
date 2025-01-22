@@ -54,21 +54,23 @@
                         <span>đơn hàng</span>
                     </div>
                 </div>
-                <div class="app-header app-header__cart d-flex">
-                    <div class="icon-content pe-2 d-flex align-items-center">
-                        <i class="fa-solid fa-cart-shopping cart"></i>
-                        @if (User.Identity.IsAuthenticated)
-                        {
-                            <div class="count-product">
-                                <span>@ViewBag.SanPhamTrongGio</span>
-                            </div>
-                        }
+                <a style="color: #fff;" href="@Url.Action("GioHang", "GioHang", new { userId = ViewBag.TaiKhoanId })">
+                    <div class="app-header app-header__cart d-flex">
+                        <div class="icon-content pe-2 d-flex align-items-center">
+                            <i class="fa-solid fa-cart-shopping cart"></i>
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                <div class="count-product">
+                                    <span>@Session["SoLuongSanPham"]</span>
+                                </div>
+                            }
+                        </div>
+                        <div class="d-flex flex-column">
+                            <span class="lh-1">Giỏ</span>
+                            <span>hàng</span>
+                        </div>
                     </div>
-                    <div class="d-flex flex-column">
-                        <span class="lh-1">Giỏ</span>
-                        <span>hàng</span>
-                    </div>
-                </div>
+                </a>
                 @if (!User.Identity.IsAuthenticated)
                 {
                     <div class="app-header app-header__login d-flex">

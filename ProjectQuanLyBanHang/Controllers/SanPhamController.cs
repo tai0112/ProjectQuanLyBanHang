@@ -30,8 +30,9 @@ namespace ProjectQuanLyBanHang.Controllers
             return View(sanPham);
         }
 
-        public ActionResult ToanBoSanPham(int maLoaiSanPham, string tinhTrangHang, string NhaCungCap, string ram, string ssd)
+        public ActionResult ToanBoSanPham(int maLoaiSanPham, string tinhTrangHang, string NhaCungCap, string ram, string ssd, string sapXep = "name")
         {
+
             string ncc = "";
             ViewBag.MaLoaiSanPham = maLoaiSanPham;
             if (!string.IsNullOrEmpty(NhaCungCap))
@@ -68,15 +69,20 @@ namespace ProjectQuanLyBanHang.Controllers
                 new SelectListItem { Text = "2 TB", Value = "2048" }
             }, "Value", "Text", ssd);
 
+            IQueryable<SanPhamChiTiet> sanPhamTheoLoai = db.sanPhamChiTiets;
+            if (maLoaiSanPham != 0)
+            {
+                sanPhamTheoLoai = db.sanPhamChiTiets.Where(o => o.SanPham.MaLoaiSanPham == maLoaiSanPham && o.SanPham.TrangThai == true);
+            }
 
-            var sanPhamTheoLoai = db.sanPhamChiTiets.Where(o => o.SanPham.MaLoaiSanPham == maLoaiSanPham && o.SanPham.TrangThai == true);
 
             if (!string.IsNullOrEmpty(tinhTrangHang))
             {
                 if (tinhTrangHang == "ConHang")
                 {
                     sanPhamTheoLoai = sanPhamTheoLoai.Where(o => o.SoLuong > 0);
-                }else
+                }
+                else
                 {
                     sanPhamTheoLoai = sanPhamTheoLoai.Where(o => o.SoLuong == 0);
                 }
@@ -90,7 +96,7 @@ namespace ProjectQuanLyBanHang.Controllers
             if (!string.IsNullOrEmpty(ram))
             {
                 int ramInt = int.Parse(ram);
-                sanPhamTheoLoai = sanPhamTheoLoai.Where(o => o.Ram.DungLuongRam  == ramInt);
+                sanPhamTheoLoai = sanPhamTheoLoai.Where(o => o.Ram.DungLuongRam == ramInt);
             }
 
             if (!string.IsNullOrEmpty(ssd))
@@ -99,6 +105,29 @@ namespace ProjectQuanLyBanHang.Controllers
                 sanPhamTheoLoai = sanPhamTheoLoai.Where(o => o.SSD == ssdInt);
             }
 
+            string sortType = sapXep;
+            switch (sapXep)
+            {
+                case "name":
+                    sanPhamTheoLoai = sanPhamTheoLoai.OrderBy(o => o.SanPham.TenSanPham);
+                    sortType = "Tên sản phẩm";
+                    break;
+                case "priceIncrease":
+                    sanPhamTheoLoai = sanPhamTheoLoai.OrderBy(o => o.GiaTien);
+                    sortType = "Giá giảm dần";
+                    break;
+                case "priceDecrease":
+                    sanPhamTheoLoai = sanPhamTheoLoai.OrderByDescending(o => o.GiaTien);
+                    sortType = "Giá tăng dần";
+                    break;
+                default:
+                    break;
+            }
+
+            ViewBag.ramSelected = ram;
+            ViewBag.ssdSelected = ssd;
+            ViewBag.nccSelected = NhaCungCap;
+            ViewBag.SapXep = sortType;
             return View(sanPhamTheoLoai.ToList());
         }
 

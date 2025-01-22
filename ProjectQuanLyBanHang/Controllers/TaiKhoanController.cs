@@ -100,6 +100,8 @@ namespace ProjectQuanLyBanHang.Controllers
                     var authenManager = HttpContext.GetOwinContext().Authentication;
                     var userIdentity = userManager.CreateIdentity(user, DefaultAuthenticationTypes.ApplicationCookie);
                     authenManager.SignIn(new AuthenticationProperties(), userIdentity);
+                    var taiKhoanId = db.taiKhoans.Where(o => o.MaTaiKhoan == user.Id).First().TaiKhoanId;
+                    Session["TaiKhoanId"] = taiKhoanId;
                     if (userManager.IsInRole(user.Id, "Admin"))
                     {
                         return RedirectToAction("Index", "TrangChu", new { area = "Admin" });
@@ -117,6 +119,7 @@ namespace ProjectQuanLyBanHang.Controllers
         {
             var authenManager = HttpContext.GetOwinContext().Authentication;
             authenManager.SignOut();
+            Session["SoLuongSanPham"] = null;
             return RedirectToAction("TrangChu", "TrangChu");
         }
     }
